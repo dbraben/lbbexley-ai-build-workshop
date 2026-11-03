@@ -1,3 +1,5 @@
+<img src="images/bexley-logo.png" alt="London Borough of Bexley" width="240">
+
 # Build your own service with AI: the Bexley AI build harness workshop
 
 A hands-on workshop for London Borough of Bexley developers. You bring a real project. You capture its requirements from a recorded Teams meeting or in your own words, then use an AI coding assistant to design it, and to plan, build and check its first piece, to the council's brand, accessibility and legal standards. Everything happens in your own service repository, made from the Bexley app template.
