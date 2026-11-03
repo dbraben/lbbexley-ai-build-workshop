@@ -1,0 +1,79 @@
+# 06 Write the requirements (GitHub Copilot)
+
+*About 20 minutes · No dev environment needed*
+
+The **lbbexley-requirements** skill turns what's in `docs/discovery/` into `docs/requirements.md`: the users and what they need, user stories with priorities and acceptance criteria, rules, data, the duties that apply, what's out of scope, and open questions. Use it with the **lbbexley-plan** agent, which prefers the strongest model. Then you turn the stories into issues, so each one can be planned and built on its own.
+
+## Steps
+
+1. Make a branch for the work in exercises 06 to 11, named after your first piece of work, in lower case with hyphens:
+
+   ```bash
+   git switch -c <branch name>
+   ```
+
+   For example `git switch -c see-free-rooms`. Not sure yet? Call it `first-story`.
+
+2. Start a new chat, choose the **lbbexley-plan** agent and ask:
+
+   ```text
+   Use the lbbexley-requirements skill.
+   ```
+
+   It reads everything in `docs/discovery/`. To use one file, name it: *"Use the lbbexley-requirements skill with docs/discovery/transcript-1.md."*
+
+3. **If it stops for personal data**, it tells you which file and roughly where, without repeating it. Fix it as in [exercise 05](../05-capture-your-requirements.md), step 5, then ask again.
+4. **Answer its questions.** It asks what's missing, all at once. Answer what you can. For the rest, say who would know, for example:
+
+   ```text
+   I don't know the peak volumes: list that as an open question for the service manager.
+   ```
+
+5. Let it save `docs/requirements.md`. The plan agent is told to write only documents in `docs/`.
+6. **Read `docs/requirements.md` carefully.** Check that:
+   - the users and their needs are right, and each need is a need, not a solution
+   - each user story has one need, a priority (Must, Should, Could or Won't), and acceptance criteria someone can check, including accessibility
+   - every rule has a source, and every number matches what was said: nothing is invented
+   - open questions say who can answer them
+   - nobody is named, and nothing could identify a person
+7. **Ask for changes in plain words.** For example:
+
+   ```text
+   Split R3 into two stories: one for the people who make requests, one for the officers who handle them.
+   R5 is a Could, not a Must.
+   The 10-working-day rule comes from the team's service standards: add that as its source.
+   ```
+
+8. **Ask the service owner to check it.** They don't need to read Markdown: copy the text into an email or Teams message, or show them the file on GitHub after exercise 11. Make their changes the same way.
+9. **Commit the requirements.** Check that nothing from `docs/discovery/` is included, then commit:
+
+   ```bash
+   git status
+   git add docs/requirements.md
+   git commit -m "Add the requirements"
+   ```
+
+10. **Turn the stories into issues.** Ask lbbexley-plan:
+
+    ```text
+    Draft an issue for each Must and Should story in docs/requirements.md.
+    ```
+
+    Read the drafts. The plan agent can't run commands, so to create them, choose **lbbexley-build** and ask: *"Create the issues drafted above with the GitHub CLI, one at a time."* Allow each `gh issue create` command. No GitHub CLI? Copy each draft into a new issue on GitHub, using the **Feature or change** form.
+
+## Check
+
+- [ ] `docs/requirements.md` has users and needs, user stories with priorities and acceptance criteria, rules with sources, and open questions with owners
+- [ ] Nothing in it is invented, and nobody is named
+- [ ] It's committed on your branch, and `docs/discovery/` isn't
+- [ ] Your repository on GitHub has an issue for each Must and Should story
+
+## What just happened
+
+- The requirements skill checked your material for personal data before it read anything else, and turned gaps into open questions rather than guessing.
+- Every later step starts from these requirements: the design reads them, and each plan starts from one story's user need and acceptance criteria.
+- One story per issue keeps changes small: each can be planned, built, checked and reviewed on its own.
+
+---
+
+[← 05 Capture your requirements](../05-capture-your-requirements.md) · [Next: 07 Design the service →](07-design-the-service.md)

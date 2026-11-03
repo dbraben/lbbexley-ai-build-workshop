@@ -1,0 +1,38 @@
+name: Workshop feedback
+description: What helped, what got in the way, or a step that didn't work as the instructions said.
+title: "Feedback: "
+labels: ["feedback"]
+body:
+  - type: dropdown
+    id: track
+    attributes:
+      label: Track
+      options:
+        - Claude Code
+        - GitHub Copilot
+        - Both, or not specific to a track
+    validations:
+      required: true
+  - type: input
+    id: exercise
+    attributes:
+      label: Exercise
+      description: For example, 05 Capture your requirements.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead. Copy any message exactly.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What would have helped
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before you submit
+      options:
+        - label: This contains no personal data and no real records.
+          required: true

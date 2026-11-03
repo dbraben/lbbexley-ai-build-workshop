@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: An idea for the Bexley standards themselves
+    url: https://github.com/dbraben/lbbexley-digital-standards/issues/new/choose
+    about: Skills, checks, the transcript cleaner and the app template are changed in the standards repository. Exercise 12 shows how.
