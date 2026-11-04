@@ -1,21 +1,15 @@
-# 05 Capture your requirements
+# Use a Teams meeting transcript (optional)
 
-*About 20 minutes, or before the session · Both tracks · No dev environment needed*
+*About 20 minutes, before exercise 05 · Both tracks · No dev environment needed*
 
-Requirements come from the people who run and use the service, in their own words. Some of those words you've already given the assistant, in exercise 04. In this exercise you decide what to add, and put it into `docs/discovery/` in your repository, ready for the requirements skill in exercise 06. Choose one or more routes:
+A recorded conversation with the people who run the service is the best source of requirements: their words, including the rules and problems nobody wrote down. You don't need one: the requirements skill asks its questions in the chat either way. But if you have one, clean it before exercise 05. The skill reads the cleaned copy first, and asks fewer questions.
 
-| Route | Use it when | You'll end up with |
-|---|---|---|
-| **C. Reuse what you've already told the assistant** | You described the service in exercise 04. This is the quickest route, and needs nothing more | Nothing extra: the set-up saved your answers to `docs/discovery/service-introduction.md`. Check it, and remove anything that shouldn't be there |
-| **A. A Teams meeting transcript** | You've recorded, or can record, a conversation with the people who run the service. The best source | `docs/discovery/transcript-1.md`: the conversation with roles instead of names |
-| **B. Your own requirement prompt** | You know the project well, or want to add what the meeting didn't cover | `docs/discovery/requirement-prompt.md`: your project in your own words |
+Cleaning a transcript is the one job in the workshop you do yourself, in a terminal, because the assistant must never see the original.
 
 > [!IMPORTANT]
-> Git ignores everything in `docs/discovery/`, so it's never committed or pushed. But that doesn't make it private from AI: approved AI tools may still read and process its contents. So only cleaned material ever goes there. Never put an original transcript, a recording or a roles file in your repository.
+> The cleaned copy goes in `docs/discovery/`. Git ignores everything there, so it's never committed or pushed. But that doesn't make it private from AI: approved AI tools may still read and process it. So only cleaned material ever goes there. Never put an original transcript, a recording or a roles file in your repository.
 
-## Route A: a Teams meeting transcript
-
-### 1. Hold the conversation (skip if you've already recorded one)
+## 1. Hold the conversation (skip if you've already recorded one)
 
 - **Who:** two or three people who run the service day to day, and the service owner if you can. Thirty minutes is enough.
 - **Before you start recording**, say why you want to record and transcribe it, who will see the transcript, and that you'll delete it once the requirements are agreed. Ask people to describe how the service works, not particular residents: "if you need an example, make one up".
@@ -31,7 +25,7 @@ Requirements come from the people who run and use the service, in their own word
   - If this worked perfectly a year from now, what would be different?
   - What must it never do?
 
-### 2. Download the transcript
+## 2. Download the transcript
 
 1. In Teams, open **Chat** and select the meeting's chat.
 2. Select **Recap**, then **Transcript**.
@@ -40,9 +34,9 @@ Requirements come from the people who run and use the service, in their own word
 
 Only the meeting's organiser and co-organisers can download the transcript. If that isn't you, ask the organiser to download it, or to make you a co-organiser.
 
-### 3. Clean it
+## 3. Clean it
 
-Run the transcript cleaner yourself, in VS Code's terminal in your repository's folder. Never ask the assistant to run it: it reads the original. (Claude Code isn't allowed to run it.) Replace `<transcript file>` with the file's name, and keep the quotes, because Teams puts spaces in file names:
+Run the transcript cleaner yourself, in a terminal in your repository's folder. If Claude Code is running in VS Code's terminal, open a second one (**Terminal**, then **New Terminal**): never type this command into Claude Code or Copilot, and never ask the assistant to run it, because it reads the original. (Claude Code isn't allowed to run it.) Replace `<transcript file>` with the file's name, and keep the quotes, because Teams puts spaces in file names:
 
 ```bash
 npm run transcript:clean -- "$HOME/Downloads/<transcript file>.vtt"
@@ -67,7 +61,7 @@ What it did:
 
 It never prints a name. If it says it couldn't find who said what, download the transcript again as `.vtt` and clean that.
 
-### 4. Name the speakers by role
+## 4. Name the speakers by role
 
 Open the roles file from your Downloads folder in VS Code (**File**, then **Open File**). Change each `"Speaker"` value to the person's role, and save it:
 
@@ -81,7 +75,7 @@ Open the roles file from your Downloads folder in VS Code (**File**, then **Open
 
 Use a role only: the cleaner stops if a role includes part of the person's name. Then run the same command again. The cleaned copy now uses the roles. Do this before you edit the cleaned copy by hand: after that, the cleaner won't replace it unless you add `--force`.
 
-### 5. Read it through, and fix what no tool can find
+## 5. Read it through, and fix what no tool can find
 
 Open `docs/discovery/transcript-1.md` and read it from start to finish. Remove or replace:
 
@@ -106,47 +100,21 @@ You change it to keep the point and lose the person:
 **Contact centre adviser:** Residents often ring several times because nobody calls them back.
 ```
 
-### 6. Look after the original
+## 6. Look after the original
 
 Leave the original transcript and the roles file in Downloads until the service owner has agreed the requirements, then delete both. Your team's records rules may say to keep them longer: if so, move them somewhere the council's policy allows, never into a repository.
 
-## Route B: your own requirement prompt
-
-Make the prompt in VS Code, on your computer. Don't create it on GitHub: a file created there is published, and the assistant only sees what's on your computer.
-
-1. Copy the template into your discovery folder, in VS Code's terminal. On a Mac or Linux:
-
-   ```bash
-   cp .github/skills/lbbexley-requirements/requirement-prompt.md docs/discovery/requirement-prompt.md
-   ```
-
-   In PowerShell:
-
-   ```powershell
-   Copy-Item .github/skills/lbbexley-requirements/requirement-prompt.md docs/discovery/requirement-prompt.md
-   ```
-
-2. Open `docs/discovery/requirement-prompt.md` and write under each heading, in your own words. The grey comments say what goes where. Leave a heading empty if you don't know: the requirements skill asks about it.
-3. Tips:
-   - Describe the need, not the solution: "officers need to see which requests are overdue", not "a red column in a table".
-   - Give numbers if you have them: how many requests, how often, how long things take now.
-   - Write down rules exactly, with where they come from: "We must reply within 10 working days (complaints policy)".
-   - Say what's out of scope. It stops the design growing.
-   - Name people by role only, and include nobody's details.
-4. To see the level of detail that helps, open `.github/skills/lbbexley-requirements/requirement-prompt-example.md`. It's for an invented project: don't copy it, describe yours.
-
 ## Check
 
-- [ ] `docs/discovery/` has what you chose: `service-introduction.md` (from exercise 04), a cleaned `transcript-1.md`, a `requirement-prompt.md`, or a mix
-- [ ] Every speaker is named by role, and you've read the transcript through and removed anything that could identify someone
-- [ ] `git status` doesn't list anything in `docs/discovery/`
+- [ ] `docs/discovery/transcript-1.md` uses roles for every speaker
+- [ ] You've read it through and removed anything that could identify someone
 - [ ] The original transcript and the roles file are in Downloads, not in your repository
 
 ## What just happened
 
 - The cleaner removed what a tool can find reliably, and kept the names outside your repository, where the assistant won't look. Your read-through covered what only a person can spot.
-- Nothing you put in `docs/discovery/` will be committed or pushed. What gets committed is the requirements document you write from it in the next exercise, which holds no personal data.
+- Nothing in `docs/discovery/` is ever committed. What's saved in your repository is the requirements document the assistant writes from it, which holds no personal data.
 
 ---
 
-Previous: 04 Set up your service, for [Claude Code](claude-code/04-set-up-your-service.md) or [GitHub Copilot](github-copilot/04-set-up-your-service.md) · Next: 06 Write the requirements, for [Claude Code →](claude-code/06-write-the-requirements.md) or [GitHub Copilot →](github-copilot/06-write-the-requirements.md)
+[← Exercises](README.md) · [Next: 05 Answer the requirements questions →](05-answer-the-requirements-questions.md)

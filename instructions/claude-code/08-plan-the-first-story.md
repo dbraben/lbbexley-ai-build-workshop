@@ -4,6 +4,9 @@
 
 Every change starts with a plan, on the strongest model. A Bexley plan has the user need, the exact words users will read, acceptance criteria someone can check, the files to change and the tests to add. Here you choose one story from your requirements and plan it, ready to build in exercise 09.
 
+> [!IMPORTANT]
+> Building in a dev environment? Do the set-up at the start of exercise 09's route B first ("Set up the environment once"). It restarts VS Code, and a plan waiting for approval doesn't survive a restart.
+
 ## Steps
 
 1. **Choose the story.** Pick a Must story whose first piece you can build in under an hour, with what you have:
@@ -16,21 +19,21 @@ Every change starts with a plan, on the strongest model. A Bexley plan has the u
    Too big? Ask Claude to split it: *"Story R2 is too big to build in an hour. Suggest how to split it."* Then pick the first part.
 
 2. Run `/clear`, and check you're in plan mode.
-3. **Ask Claude to plan it**, naming the story and its issue, and saying what you have. Choose the wording that fits:
+3. **Ask Claude to plan it**, naming the story and saying what you have. Choose the wording that fits:
 
    **With a dev environment:**
 
    ```text
-   Plan story R<number> from docs/requirements.md (issue #<number>): <the story's short
-   name>. Build it in my dev environment, in the solution named in AGENTS.md.
+   Plan story R<number> from docs/requirements.md: <the story's short name>.
+   Build it in my dev environment, in the solution named in AGENTS.md.
    ```
 
    **Files only:**
 
    ```text
-   Plan story R<number> from docs/requirements.md (issue #<number>): <the story's short
-   name>. There's no dev environment yet: build the screen as pa.yaml source only, with a
-   named formula holding a few rows of made-up sample data instead of Dataverse.
+   Plan story R<number> from docs/requirements.md: <the story's short name>.
+   There's no dev environment yet: build the screen as pa.yaml source only, with a named
+   formula holding a few rows of made-up sample data instead of Dataverse.
    ```
 
 4. Claude uses the plan skill, which runs on Opus. It reads `AGENTS.md`, `docs/requirements.md`, `docs/architecture.md` and the skill for your platform, then writes the plan.
@@ -46,7 +49,7 @@ Every change starts with a plan, on the strongest model. A Bexley plan has the u
 ## Check
 
 - [ ] The plan has the exact words users will read, and acceptance criteria someone can check
-- [ ] The plan is saved in `docs/plans/`, and names the story and its issue
+- [ ] The plan is in `docs/plans/`, and names the story
 - [ ] Claude hasn't changed any other files yet
 
 ## What just happened

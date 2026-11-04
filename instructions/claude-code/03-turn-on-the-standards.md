@@ -55,7 +55,7 @@ The plugin is now active in this repository, and only in Bexley repositories lik
 - guardrails that run automatically: a reminder at the start of each session, the personal-data guard, a Dataverse guard, the standards check after every save, and the end-of-run check before Claude finishes
 - the Microsoft Learn MCP server, so Claude checks Microsoft's current documentation rather than relying on memory
 
-The template's settings also stop Claude running the transcript cleaner or reading `.vtt` and roles files, and turn off Claude Code's attribution lines, so commits and pull requests don't carry them.
+The template's settings also let Claude commit your work without asking you, while it still asks before it pushes anything to GitHub. They stop Claude running the transcript cleaner or reading `.vtt` and roles files, and turn off Claude Code's attribution lines, so its commits don't carry them.
 
 ---
 

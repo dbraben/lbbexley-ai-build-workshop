@@ -6,9 +6,9 @@ Now **lbbexley-build** builds what you planned, on the everyday model. With hook
 
 Follow the route for what your plan builds. Each route starts and ends the same way:
 
-- Select **Build this plan** under the plan. It hands over to **lbbexley-build** with a prompt ready: send it.
+- Select **Build this plan** under the plan. It hands over to **lbbexley-build** with a prompt ready: send it. If the button isn't under the latest reply, choose **lbbexley-build** in the agent picker and say: *"Build the plan in docs/plans/."*
 - Review and keep each change. After each edit, the standards check's result goes back to the agent: "Bexley standards check passed for ...", or a list of problems it must fix straight away, however minor.
-- When the build finishes, select **Check my work** to hand over to **lbbexley-check**. If it reports problems, select **Fix what the check found**, then check again.
+- When the build finishes, select **Check my work** to hand over to **lbbexley-check**. If it reports problems, select **Fix what the check found**, then **Check my work** again. When it finds nothing outstanding, select **Commit the work**. The buttons are under every reply, whatever the check found, so look at the result first.
 
 ## Route A: a canvas app screen, files only
 
@@ -21,26 +21,23 @@ Follow the route for what your plan builds. Each route starts and ends the same 
    - there's one heading with `Role: =TextRole.Heading1`, and it says what the screen is for
    - every control has a name like `lblHeading` or `galItems`, and every icon and input has an `AccessibleLabel`
    - the words match the plan exactly
-6. Commit it on your branch:
 
-   ```bash
-   git add -A
-   git commit -m "<what the story lets people do>"
-   ```
+   To change anything that doesn't, choose **lbbexley-build** in the agent picker and ask for it, then select **Check my work** again.
+6. Select **Commit the work**. lbbexley-build commits the screen and tells you it's committed. If the check's only problem is the missing test target, that's expected with no app to open yet: commit the work anyway.
 
 ## Route B: in your dev environment
 
 ### Set up the environment once, before you hand over
 
 1. **Create the solution.** In [Power Apps](https://make.powerapps.com), open your dev environment, then **Solutions**, then **New solution**. Use the solution name from `AGENTS.md`, and the Bexley publisher (prefix `lbbexley`).
-2. **Connect the Power Platform CLI** and clone the solution into your repository, using your environment's address and solution name:
+2. **Sign in to the Power Platform CLI**, in VS Code's terminal, with your environment's address. A browser opens for you to sign in:
 
    ```bash
    pac auth create --environment https://<your-dev-environment>.crm11.dynamics.com
-   pac solution clone --name <solution name> --outputDirectory src/solution
    ```
 
 3. **Start the Dataverse MCP server** if your story uses Dataverse. Run **MCP: List Servers** from the Command Palette, choose **dataverse** and start it. When VS Code asks for the Dataverse dev environment address, give yours: never a test or production address.
+4. **Get the solution's source.** Choose **lbbexley-build** and ask: *"Clone the solution named in AGENTS.md into src/solution."* It runs `pac solution clone`: allow it.
 
 ### Then build what your story needs
 
@@ -48,7 +45,7 @@ Follow the route for what your plan builds. Each route starts and ends the same 
 
 - Select **Build this plan**. VS Code asks before each Dataverse tool runs. Approve listing and describing tables, and creating the tables, columns and a few made-up records.
 - Ask the agent to delete one of the records. The Bexley hook blocks it: deletes are never allowed through the assistant. Never approve a delete yourself.
-- It runs `pac solution sync` in `src/solution`, so the table is in source control.
+- It runs `pac solution sync` in `src/solution`, so the table's source is in your repository.
 
 **A canvas app screen**
 
@@ -61,20 +58,20 @@ Follow the route for what your plan builds. Each route starts and ends the same 
 
 - The agent creates the tables and columns through the Dataverse MCP server, as above.
 - Build the app, its form and its views in the app designer. Keep Microsoft's standard forms and theme: they're tested for accessibility.
-- Run `pac solution sync` in `src/solution`, so the app is reviewed in your pull request.
+- Ask lbbexley-build: *"Sync the solution into src/solution."* Then the app's source is in your repository, where the checks can see it.
 
 **A Power Pages page**
 
 - Use a dev site in your environment. Dev sites are private, so the public can't find them.
-- Download the site's source into your repository with the Power Platform CLI: `pac pages list` shows the site's ID, then `pac pages download --path src/pages --webSiteId <site ID> --modelVersion 2`.
-- Select **Build this plan**. The agent works on the page in `src/pages/`. Upload to the dev site only, with `pac pages upload --path src/pages/<site folder> --modelVersion 2`, and allow the command only when you've read the changes.
+- Ask lbbexley-build: *"Download the dev site's source into src/pages."* It finds the site's ID with `pac pages list`, then runs `pac pages download`: allow both.
+- Select **Build this plan**. The agent works on the page in `src/pages/`. It uploads to the dev site only, with `pac pages upload`: allow the command only when you've read the changes.
 - Watch the standards check on each page: the page title, the language, labels, heading order and no tracking scripts.
 
 **A Power Automate flow**
 
 - Build the flow in the Power Automate designer, inside your solution, following the plan: the agents plan and review flows, but don't build them in the designer.
-- Run `pac solution sync` in `src/solution`. Then ask lbbexley-build: *"Check the flow in src/solution against the lbbexley-power-automate skill."* The standards check also runs on the flow's source: error handling, hard-coded mailboxes and personal data in emails.
-- Make the fixes in the designer, and sync again.
+- Ask lbbexley-build: *"Sync the solution into src/solution, and check the flow against the lbbexley-power-automate skill."* The standards check also runs on the flow's source: error handling, hard-coded mailboxes and personal data in emails.
+- Make the fixes in the designer, and ask the agent to sync again.
 
 **A Copilot Studio agent**
 
@@ -87,17 +84,12 @@ Follow the route for what your plan builds. Each route starts and ends the same 
 
 ### Check and commit
 
-Select **Check my work**, fix anything it finds, then commit on your branch:
-
-```bash
-git add -A
-git commit -m "<what the story lets people do>"
-```
+Whatever you built, select **Check my work**, fix anything it finds, then select **Commit the work**. When you change something outside the agents, such as a flow in the designer, ask lbbexley-build to sync the solution again, then check and commit as usual.
 
 ## Check
 
-- [ ] `npm run check` finds no problems
-- [ ] lbbexley-check reported nothing outstanding
+- [ ] `npm run check:all` finds no problems
+- [ ] lbbexley-check reported nothing outstanding, and lbbexley-build said the work is committed
 - [ ] What you built matches the plan, including the exact words
 - [ ] With a dev environment: the source is in `src/`, and deleting a record was blocked
 

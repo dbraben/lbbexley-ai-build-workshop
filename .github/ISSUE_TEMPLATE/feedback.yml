@@ -17,7 +17,7 @@ body:
     id: exercise
     attributes:
       label: Exercise
-      description: For example, 05 Capture your requirements.
+      description: For example, 05 Answer the requirements questions.
   - type: textarea
     id: what-happened
     attributes:

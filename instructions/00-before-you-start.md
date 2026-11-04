@@ -30,25 +30,36 @@ Leave these for later, with the Digital Team: anything that takes payments, conn
 
 ## 2. Gather what you know
 
-You need at least one of these. Exercise 05 shows how to use each one.
+In exercise 05 the assistant asks about your project in the chat, a few questions at a time: what it's for and who uses it, how it works today and where it goes wrong, what it must do, how many requests there are, the rules it follows, the information it needs about people, and what "done" looks like for the service owner. Anything you can't answer, you can send to the service team as a table and paste back later.
+
+So before the session, gather what will help you answer:
 
 | Source | Why it helps | What to do before the session |
 |---|---|---|
-| **A recorded Teams meeting** with the people who run the service | Their words, including the rules and problems nobody wrote down. The best source | Hold a 30-minute conversation and record it with transcription on. Exercise 05 has the questions to ask and how to record it |
-| **Notes** from conversations, or a process you've written down | Quick, if you already have them | Make sure they name people by role, not by name |
-| **Your own requirement prompt** | Fine on its own for a small project | Nothing: you'll write it in exercise 05 |
+| **What you know** about the service | Enough on its own for a small project | Nothing: you'll answer in the chat |
+| **Notes** from conversations, or a process you've written down | Quick, if you already have them | Make sure they describe people by role, not by name |
+| **A recorded Teams meeting** with the people who run the service (optional) | Their words, including the rules and problems nobody wrote down | Hold a 30-minute conversation and record it with transcription on. [Use a Teams meeting transcript](use-a-teams-transcript.md) has the questions to ask and how to record it |
 
 > [!IMPORTANT]
-> If you record a meeting, don't download the transcript into your repository or share it with an assistant. Exercise 05 shows how to clean it first.
+> If you record a meeting, don't download the transcript into your repository or share it with an assistant. [Use a Teams meeting transcript](use-a-teams-transcript.md) shows how to clean it first.
 
 ## 3. Install the tools
 
 | Tool | Why | Check it with |
 |---|---|---|
 | Visual Studio Code | Where you work | Open it |
-| Git | Version control | `git --version` |
+| Git | Version control. The assistant commits your work with it, so you never have to | `git --version` |
 | Node.js 22 or later | Runs the standards check, the transcript cleaner and the accessibility tests | `node --version` |
-| GitHub CLI | Creates issues from your requirements (exercise 06). Optional: you can create them by hand | `gh --version` |
+| GitHub CLI (optional) | Lets the assistant open an issue with your idea for the harness in exercise 12. Without it, you get the text to paste into a form | `gh --version` |
+
+Git needs your name and an email address for the commits the assistant makes for you. If `git config --global user.name` shows nothing, set them:
+
+```bash
+git config --global user.name "<your name>"
+git config --global user.email "<your email address>"
+```
+
+To keep your email address private, use the one GitHub gives you, under **Settings**, then **Emails**.
 
 Then, for your track:
 
@@ -91,8 +102,8 @@ To build in a dev environment in exercise 09, you also need:
 ## Check
 
 - [ ] You've chosen a project, and you can say in one sentence what it's for
-- [ ] You have a recorded Teams meeting, notes, or enough in your head to write a requirement prompt
-- [ ] `git --version` and `node --version` work, and Node.js is 22 or later
+- [ ] You know enough about your project to answer questions about it, from your own knowledge, notes or a recorded meeting
+- [ ] `git --version` and `node --version` work, Node.js is 22 or later, and `git config --global user.name` shows your name
 - [ ] Your assistant is installed and signed in (for Claude Code, `claude --version` works in a new terminal), and your AI account's privacy settings are set
 - [ ] You can open both repositories on GitHub
 

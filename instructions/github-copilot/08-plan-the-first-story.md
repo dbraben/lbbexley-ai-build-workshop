@@ -16,19 +16,19 @@ Every change starts with a plan, on the strongest model. A Bexley plan has the u
    Too big? Ask lbbexley-plan to split it: *"Story R2 is too big to build in an hour. Suggest how to split it."* Then pick the first part.
 
 2. Start a new chat and choose the **lbbexley-plan** agent.
-3. **Ask it to plan the story**, naming the story and its issue, and saying what you have. Choose the wording that fits:
+3. **Ask it to plan the story**, naming the story and saying what you have. Choose the wording that fits:
 
    **With a dev environment:**
 
    ```text
-   Plan story R<number> from docs/requirements.md (issue #<number>): <the story's short name>.
+   Plan story R<number> from docs/requirements.md: <the story's short name>.
    Build it in my dev environment, in the solution named in AGENTS.md.
    ```
 
    **Files only:**
 
    ```text
-   Plan story R<number> from docs/requirements.md (issue #<number>): <the story's short name>.
+   Plan story R<number> from docs/requirements.md: <the story's short name>.
    There's no dev environment yet: build the screen as pa.yaml source only, with a named
    formula holding a few rows of made-up sample data instead of Dataverse.
    ```
@@ -41,11 +41,11 @@ Every change starts with a plan, on the strongest model. A Bexley plan has the u
    - the files it will create or change, under `src/`
    - the tests: the page or screen in `tests/accessibility/targets.json`, or agent questions in `tests/agent-test-set.md`
 6. **Ask for one change**, to see how planning works. For example: *"Use the words from the service team: they call them 'cases', not 'requests'."*
-7. Don't select **Build this plan** yet. You do that at the start of exercise 09.
+7. Don't select **Build this plan** yet. You do that at the start of exercise 09. If lbbexley-plan asks you to select **Check my work** for the plan, you can skip it: the plan is checked with what you build.
 
 ## Check
 
-- [ ] The plan is saved in `docs/plans/`, and names the story and its issue
+- [ ] The plan is in `docs/plans/`, and names the story
 - [ ] It has the exact words users will read, and acceptance criteria someone can check
 - [ ] Nothing outside `docs/` has changed
 

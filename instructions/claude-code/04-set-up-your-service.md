@@ -33,38 +33,25 @@
    - runs the standards check on every file it changed, and sends it back to fix anything it finds
    - asks the **lbbexley:end-of-run-reviewer** agent, on Haiku, to review the changes for what the check can't see, such as wording and missing tests
 
-   Claude Code shows the request for the review as a **Stop hook error**. That's the check working, not a fault. The reviewer runs in the background, so you may see "the review on the smaller model is still running" while Claude waits for it. When the review reports, Claude carries on by itself and fixes anything it found. When both are clean, Claude Code shows "Bexley end-of-run check passed".
-6. Restart Claude Code so the Microsoft plugins it turned on are loaded: run `/exit`, then `claude`.
-7. Commit the set-up on a branch and open a pull request. Ask Claude to do it, or run:
+   Claude Code shows the request for the review as a **Stop hook error**. That's the check working, not a fault. The reviewer runs in the background, so you may see "the review on the smaller model is still running" while Claude waits for it. When the review reports, Claude carries on by itself and fixes anything it found.
+6. **Watch Claude commit the set-up.** When everything passes, the check asks Claude to commit the work: one more **Stop hook error**, starting "Bexley end-of-run check passed. Now save the work". Claude commits the set-up, on `main`, and tells you it's committed. Then Claude Code shows "Bexley end-of-run check passed". Committing saves a version of your work in Git, on your computer. You don't run any Git commands: Claude does this at the end of every piece of work.
 
-   ```bash
-   git switch -c set-up
-   git add -A
-   git commit -m "Set up the service"
-   git push -u origin set-up
-   ```
-
-   Then open a pull request on GitHub and fill in the template. Claude asks before it pushes, because the template sets `git push` to ask.
-8. On the pull request, watch the **Quality** workflow. **Bexley standards** passes. **Accessibility tests** is skipped: it runs once the repository has an `A11Y_BASE_URL` variable. Merge the pull request, then update your copy:
-
-   ```bash
-   git switch main
-   git pull
-   ```
+   If Claude says Git doesn't know who you are, set your name and email as in [exercise 00](../00-before-you-start.md), then ask Claude: *"Commit the set-up."*
+7. Restart Claude Code so the Microsoft plugins it turned on are loaded: run `/exit`, then `claude`.
 
 ## Check
 
 - [ ] `AGENTS.md` and `README.md` describe your service, with no `{{...}}` placeholders left
 - [ ] The compliance documents in `docs/compliance/` name your service. Any that depend on a decision you haven't made yet say "To be confirmed after the design."
-- [ ] Claude Code showed "Bexley end-of-run check passed" before it finished
-- [ ] The pull request passed **Bexley standards** and is merged
+- [ ] Claude said the set-up is committed, and Claude Code showed "Bexley end-of-run check passed" before it finished
 
 ## What just happened
 
 - The set-up left some `{{...}}` parts in the compliance documents on purpose. They need real decisions from the service team, so `npm run check:release` keeps failing until they're done.
 - The end-of-run review ran on Haiku, a smaller and faster model, because checking needs less than building. It uses far less of your allowance than the build did.
-- From now on, the standards check runs three times for every change: after each save, at the end of each run, and on the pull request.
+- The set-up was committed only after the review, because the review reads the changes that haven't been committed yet. Claude never makes a branch, pushes or opens a pull request unless you ask.
+- From now on, the standards check runs for every change: after each save, at the end of each run, and again on GitHub whenever your work is pushed there.
 
 ---
 
-[← 03 Turn on the standards](03-turn-on-the-standards.md) · [Next: 05 Capture your requirements →](../05-capture-your-requirements.md)
+[← 03 Turn on the standards](03-turn-on-the-standards.md) · [Next: 05 Answer the requirements questions →](../05-answer-the-requirements-questions.md)

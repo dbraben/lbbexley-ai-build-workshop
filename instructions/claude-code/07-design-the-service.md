@@ -6,7 +6,7 @@
 
 ## Steps
 
-1. **Go back to plan mode.** Press Shift+Tab until the line below the prompt says **⏸ plan mode on**: the design changes several files, so you see the plan first. Check you're on the branch you made in exercise 06 (`git branch` shows it).
+1. **Go back to plan mode.** Press Shift+Tab until the line below the prompt says **⏸ plan mode on**: the design changes several files, so you see the plan first.
 2. Run:
 
    ```text
@@ -16,32 +16,29 @@
    It starts from `docs/requirements.md`.
 
 3. Claude asks about anything the requirements leave open that changes the design: devices, a non-digital route, special category data, decisions about people, payments, other systems. Answer what you can. For the rest, say: *"Assume the simplest option and list it as an open decision."*
-4. **Read the plan.** It's the draft design: nothing is saved yet. Approve it with **Yes, manually approve edits**. Claude then saves `docs/architecture.md` and asks before each other change.
-5. Open `docs/architecture.md` and check:
+4. **Read the plan: it's the draft design.** Claude hasn't written the design yet. Check that:
    - each component has a reason. Push back if one hasn't earned its place: *"Why do we need Power Pages if only staff use it?"*
    - there's a non-digital route if residents use the service
-   - the duties table covers accessibility and every other duty that applies, with what the design does about each
+   - the duties cover accessibility and every other duty that applies, with what the design does about each
    - the risks and open decisions are listed, with who decides
-   - the diagram is in a ```mermaid block. GitHub draws it; in VS Code, a Mermaid preview extension does
-6. **Reconcile the configuration.** A design can change more than the component list. Ask Claude: *"Reconcile the configuration with docs/architecture.md, as the architect skill describes."* It brings the Microsoft plugins, the compliance documents, the accessibility test targets, the environment settings and "Built with" in `AGENTS.md` into line with the design, and tells you what it changed and what's still open. If there's no dev environment yet, that's expected: it records that the environment is still to be set up.
-7. Commit it on your branch:
 
-   ```bash
-   git add docs/architecture.md AGENTS.md
-   git commit -m "Design the service"
-   ```
+   Ask for changes before you approve it.
+5. **Approve it** with **Yes, manually approve edits**, then approve each edit as it comes. Claude writes `docs/architecture.md`, then brings the configuration into line with the design: the Microsoft plugins, the compliance documents, the accessibility test targets, the environment settings and "Built with" in `AGENTS.md`. It tells you what it changed and what's still open. If there's no dev environment yet, that's expected: it records that the environment is still to be set up.
+6. **Let the end-of-run check finish.** It reviews the design and the configuration changes, then asks Claude to commit them. Claude commits them and tells you.
+7. **Optional: see the diagram.** Open `docs/architecture.md` in VS Code and press Ctrl+Shift+V (Cmd+Shift+V on a Mac) for the preview. A Mermaid preview extension draws the diagram; GitHub draws it too, once your work is pushed there.
 
 ## Check
 
-- [ ] `docs/architecture.md` exists, with users, components, how it works, duties, risks and a diagram
+- [ ] `docs/architecture.md` has users, components, how it works, duties, risks and a diagram
 - [ ] Every component has a reason, and open questions are listed as decisions, not guessed
+- [ ] Claude said the design is committed
 
 ## What just happened
 
 - The architect skill is pinned to Opus, so it uses the strongest model even outside plan mode.
-- The duties table comes from the legal-duty skills: accessibility, data protection, equality, publicity and AI transparency. Each points to the compliance document in `docs/compliance/` it feeds.
+- The duties come from the legal-duty skills: accessibility, data protection, equality, publicity and AI transparency. Each points to the compliance document in `docs/compliance/` it feeds.
 - Every plan reads the requirements and this architecture, so you never explain the service again.
 
 ---
 
-[← 06 Write the requirements](06-write-the-requirements.md) · [Next: 08 Plan the first story →](08-plan-the-first-story.md)
+[← 06 Check the requirements](06-check-the-requirements.md) · [Next: 08 Plan the first story →](08-plan-the-first-story.md)

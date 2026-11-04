@@ -8,7 +8,7 @@ GitHub Copilot gets the Bexley standards from files already in your repository: 
 |---|---|
 | `AGENTS.md` and `.github/copilot-instructions.md` | Your service's details and the rules that always apply |
 | `.github/skills/lbbexley-*` | The Bexley skills: brand, accessibility, content style, the legal duties, one per platform, and the requirements, architect, plan, quality-checks, review and improve skills |
-| `.github/agents/lbbexley-*` | The plan, build and check agents, and read-only reviewers |
+| `.github/agents/lbbexley-*` | The plan, build and check agents, which hand over to each other with buttons such as **Build this plan**, **Check my work** and **Commit the work**, and read-only reviewers |
 | `.github/instructions/lbbexley-*` | Rules that apply automatically to the files they cover, such as canvas app source |
 | `.github/hooks/lbbexley.json` | Hooks (a preview feature) that run the standards check after each edit and before the agent finishes |
 
@@ -26,7 +26,7 @@ GitHub Copilot gets the Bexley standards from files already in your repository: 
 6. Open `.github/hooks/lbbexley.json` and read what runs when. You'll see the hooks work in exercise 04.
 
 > [!WARNING]
-> In Copilot there's no guard that stops a message containing personal data before it reaches the model, and no setting that stops it reading a file in your repository's folder. Take extra care: fictional data only, and keep original transcripts and roles files out of your repository (exercise 05).
+> In Copilot there's no guard that stops a message containing personal data before it reaches the model, and no setting that stops it reading a file in your repository's folder. Take extra care: fictional data only, and keep original transcripts and roles files out of your repository ([Use a Teams meeting transcript](../use-a-teams-transcript.md)).
 
 ## Check
 
@@ -37,7 +37,7 @@ GitHub Copilot gets the Bexley standards from files already in your repository: 
 ## What just happened
 
 - Copilot reads the same standards as Claude Code. The synced copies are written from the standards repository, so the two tools follow identical rules.
-- Never edit the synced files by hand. The pull request check fails if they differ from the release, and `npm run standards:update` replaces them.
+- Never edit the synced files by hand. The check on GitHub fails if they differ from the release, and `npm run standards:update` replaces them.
 
 ---
 

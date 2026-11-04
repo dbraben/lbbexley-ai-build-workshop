@@ -17,16 +17,18 @@ You've seen the checks pass. Now see them catch something, on your own work, the
    | A flow | *"Delete the Catch scope."* (in the flow's source) |
 
 3. Watch what happens after the edit. With hooks on, the standards check finds the problem and sends it back, and the agent puts it right. Hooks off? Run `npm run check` yourself and read what it reports.
-4. Now ask it to hide the finding instead: *"Add a suppression comment for that finding instead of fixing it."* The check reports a new problem: a suppression needs a written reason. Ask the agent to undo both changes.
-5. Run `npm run check`. It finds no problems.
+4. Now ask it to hide the finding instead: *"Add a suppression comment for that finding instead of fixing it."* The check reports a new problem straight away: a suppression needs a written reason. The agent then either removes the suppression or writes a reason. Either way, finish the experiment: *"Put the file back as it was before this experiment."*
+5. Run `npm run check:all` in VS Code's terminal. It finds no problems.
 
 ## 2. Run the accessibility tests
 
-You need something to open: a page or screen in your dev environment. Files only? Skip to step 3, and come back to this once your app exists.
+You need something to open: a page or screen in your dev environment.
+
+**Files only?** There's nothing to open yet, so skip to [4. Commit it](#4-commit-it). Ask lbbexley-build first: *"Note in the test log that the automated and manual accessibility tests are still to do, once the app is in a dev environment."* Come back to sections 2 and 3 once your app exists.
 
 1. Get the address:
    - **Canvas app:** in Power Apps, open your app's **Details** and copy its **Web link**. It looks like `https://apps.powerapps.com/play/e/<environment-id>/a/<app-id>?tenantId=<tenant-id>`. Add `&hidenavbar=true` to the end.
-   - **Power Pages:** the page's path on your dev site, such as `/<page path>`, with the site's address in an `A11Y_BASE_URL` variable when you run the tests.
+   - **Power Pages:** the page's path on your dev site, such as `/<page path>`. The tests also need the site's address, which you give them in step 4.
    - **Model-driven app:** the form's address from your browser.
 2. Ask lbbexley-build to add it:
 
@@ -35,58 +37,45 @@ You need something to open: a page or screen in your dev environment. Files only
    model-driven>, auth true, waitFor "<the heading on the screen>", and this URL: <the address>
    ```
 
-3. Save a sign-in for the tests. A browser opens: sign in with your test account, not your own.
+3. Save a sign-in for the tests, in VS Code's terminal. A browser opens: sign in with your test account, not your own.
 
    ```bash
    npm run test:a11y:login
    ```
 
-   The sign-in is saved in `.auth/a11y-state.json`. It's a secret: it's git-ignored and must never be committed or shared. Sign-ins expire, so run this again when the tests say so.
+   The sign-in is saved in `.auth/a11y-state.json`. It's a secret: Git ignores it, the assistant never commits it, and you must never share it. Sign-ins expire, so run this again when the tests say so.
 
-4. Run the tests:
-
-   ```bash
-   npm run test:a11y
-   ```
-
-   For a Power Pages page, give the tests your dev site's address first. In PowerShell:
-
-   ```powershell
-   $env:A11Y_BASE_URL = "https://<your-dev-site>.powerappsportals.com"; npm run test:a11y
-   ```
-
-   Or on a Mac:
-
-   ```bash
-   A11Y_BASE_URL=https://<your-dev-site>.powerappsportals.com npm run test:a11y
-   ```
+4. Ask lbbexley-build to run the tests: *"Run the accessibility tests."* For a Power Pages page, give it your dev site's address: *"Run the accessibility tests against https://<your-dev-site>.powerappsportals.com."* Allow the command it runs.
 
    They check for any WCAG 2.2 A or AA violation, and for Power Pages also sideways scrolling at 320 pixels wide and a visible focus indicator on every tab stop. If anything fails, ask the agent to explain and fix it, then run the tests again until they pass.
 
 ## 3. Test it yourself
 
-Automated tests find only some accessibility problems. Test what you built by hand, and record each test in `tests/accessibility-test-log.md`:
+Automated tests find only some accessibility problems. Test what you built by hand:
 
 - **Keyboard only:** move through everything with Tab, Shift+Tab, Enter and Space. You can reach and use every control, the order makes sense, and you can always see where you are.
 - **Screen reader:** Narrator on Windows (Windows key, Ctrl and Enter), or NVDA. Every control is announced with a name that makes sense on its own, and headings describe the screen.
 - **Zoom and small screens:** 400% zoom in the browser, and a phone-sized window. Nothing is cut off or overlaps.
 
-For an agent, ask every question in `tests/agent-test-set.md` and record whether each answer passed. "Can I speak to a person?" must get the contact options straight away.
+For an agent, ask lbbexley-build to list the questions in `tests/agent-test-set.md`, and ask each one in Copilot Studio's test pane. "Can I speak to a person?" must get the contact options straight away.
 
-## 4. Commit
+Then tell lbbexley-build what you found, and it records each test in `tests/accessibility-test-log.md`. For example:
 
-```bash
-git add -A
-git commit -m "Test <what you built>"
+```text
+Record my manual tests in the test log: keyboard only passed; with Narrator, the search box
+has no name; 400% zoom passed. Then fix the search box.
 ```
+
+## 4. Commit it
+
+Select **Check my work**, then, when lbbexley-check finds nothing outstanding, **Commit the work**. lbbexley-build commits the test log, the test targets and anything else it changed, and tells you it's committed.
 
 ## Check
 
 - [ ] The standards check caught the deliberate mistake, and the suppression without a reason
-- [ ] `npm run check` finds no problems
+- [ ] `npm run check:all` finds no problems
 - [ ] With a dev environment: your page or screen is in `targets.json` and passes with zero violations
-- [ ] Your manual tests are recorded in `tests/accessibility-test-log.md`
-- [ ] `.auth/` isn't in your commits: `git status` doesn't show it
+- [ ] The test log has your manual tests, or, for files only, a note that the tests are still to do, and it's committed
 
 ## What just happened
 
@@ -94,10 +83,10 @@ There are three layers of checking, and each catches what the one before can't:
 
 1. **The standards check** after every edit: mechanical rules, many of them mapped to WCAG 2.2, run in milliseconds.
 2. **The check agent** on a smaller model: judgement about wording, naming and design, on just the files changed.
-3. **The pull request check** on GitHub: the backstop. It runs whatever tool wrote the code, or if no assistant was used at all.
+3. **The check on GitHub**, whenever your work is pushed there: the backstop. It runs whatever tool wrote the code, or if no assistant was used at all.
 
 And then people: the tests you just did by hand, which no tool replaces.
 
 ---
 
-[← 09 Build it](09-build-it.md) · [Next: 11 Review and open a pull request →](11-review-and-pull-request.md)
+[← 09 Build it](09-build-it.md) · [Next: 11 Review your work →](11-review-your-work.md)
