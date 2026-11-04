@@ -8,7 +8,7 @@ There's no set scenario: each attendee brings a real project. Your job is to hel
 
 ### Two weeks before
 
-- **Publish the harness.** The standards, the template and this workshop must be on GitHub at release `v0.3.0` or later, as the standards repository's `docs/setup.md` describes. The template must be marked as a **Template repository**.
+- **Publish the harness.** The standards, the template and this workshop must be on GitHub at release `v0.3.2` or later, as the standards repository's `docs/setup.md` describes. The template must be marked as a **Template repository**.
 - **Visibility.** Attendees must be able to see all three repositories. If they're private, add the attendees, and give each service repository a `standards-token` secret (see `standards-check.yml`), or the pull request check can't read the standards.
 - **Labels.** Check the `harness-improvement` label exists in the standards repository. Decide whether attendees may open real harness-improvement issues in exercise 12, or only read the drafts.
 - **AI accounts.** Each attendee needs Claude Pro or Max, or a GitHub Copilot plan with agent mode. Check which models each Copilot plan offers: the plan, build and check agents prefer Opus, Sonnet and Haiku, and fall back down their lists.
@@ -92,12 +92,16 @@ They can't clean a transcript until they've created their repository in exercise
 | The cleaner says the roles file isn't valid JSON | A missing comma or quote after editing. Fix it in VS Code, which shows the error, or delete the roles file to start again |
 | The cleaner says a role includes part of a name | Change the role to the job only, such as "Team leader" |
 | The cleaner won't replace a cleaned file | The attendee edited it by hand. That's deliberate: add `--force` only if they want to lose their edits |
+| The attendee can't find the requirements | They're in `docs/requirements.md` on the attendee's computer, on their branch: open it in VS Code. GitHub only shows it once the branch is pushed, and then on the branch, not `main`. If Claude showed a plan instead, the attendee was still in plan mode: approve the plan, or leave plan mode (exercise 06, step 1) and run it again |
+| The requirement prompt was created on GitHub | It's published, and Claude can't see it until the attendee pulls. Run `git pull`, then `git rm --cached docs/discovery/requirement-prompt.md` and commit: the file stays on the attendee's computer, and Git ignores it from then on. It's still in the repository's history, so check it holds no personal data |
 | The requirements skill stops for personal data | It's doing its job. The attendee finds the place it describes and fixes it by hand, then runs it again |
 | Copilot's plan agent can't create issues | It can't run commands. Choose lbbexley-build and ask it to create the drafted issues, or create them by hand |
 | Claude Code didn't offer to install the plugin | Trust the folder, then `/plugin marketplace add dbraben/lbbexley-digital-standards` and `/plugin install lbbexley@lbbexley-digital` |
 | There's no **Use this template** button | The attendee isn't signed in to GitHub. Or give them the link in exercise 02, which opens the same page |
 | `claude` isn't found in VS Code's terminal | Only the VS Code extension is installed, and it doesn't add `claude` to the terminal. Install the command-line version (exercise 00), then open a new terminal |
 | `/model` doesn't show `opusplan` | Claude Code calls it **Opus Plan Mode**. It's the last option, and it's only listed while it's the model in use. If it isn't there, type `/model opusplan` |
+| Claude Code shows a **Stop hook error** at the end of a run | It's the end-of-run check asking for its review, which is the check working. Claude starts the reviewer, and carries on by itself when it reports |
+| The end-of-run check asks for the same review again and again, then says the review didn't run | The attendee's Claude Code plugin is older than 0.3.1. In a terminal: `claude plugin marketplace update lbbexley-digital`, then `claude plugin update lbbexley@lbbexley-digital`, and start Claude Code again |
 | Claude Code doesn't start in plan mode | The attendee is using the Claude Code panel, which never takes its starting mode from the project. Run `claude` in VS Code's terminal instead, or set `claudeCode.initialPermissionMode` to `plan` in VS Code user settings |
 | Copilot doesn't list the lbbexley agents | Check the workspace is trusted, Agent mode is on, and VS Code is up to date |
 | The Copilot hooks don't run | They're a preview feature: check `chat.useHooks` is on and VS Code is up to date. Meanwhile, run `npm run check` and hand over to lbbexley-check by hand |

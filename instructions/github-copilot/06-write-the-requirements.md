@@ -2,11 +2,17 @@
 
 *About 20 minutes · No dev environment needed*
 
-The **lbbexley-requirements** skill turns what's in `docs/discovery/` into `docs/requirements.md`: the users and what they need, user stories with priorities and acceptance criteria, rules, data, the duties that apply, what's out of scope, and open questions. Use it with the **lbbexley-plan** agent, which prefers the strongest model. Then you turn the stories into issues, so each one can be planned and built on its own.
+Copilot writes one document, `docs/requirements.md`, from what you gave it in exercises 04 and 05: who uses the service and what they need, user stories with priorities and acceptance criteria, rules, data, the duties that apply, what's out of scope, and open questions. You read it, ask for changes, commit it, and turn its stories into issues.
+
+## Where the requirements will be
+
+`docs/requirements.md` is a file in your repository, **on your computer**. Open it in VS Code: in the Explorer, select **docs**, then **requirements.md**.
+
+It isn't on GitHub until you push your branch in exercise 11, and then it's on your branch, not on `main`.
 
 ## Steps
 
-1. Make a branch for the work in exercises 06 to 11, named after your first piece of work, in lower case with hyphens:
+1. **Make a branch** for exercises 06 to 11, named after your first piece of work, in lower case with hyphens:
 
    ```bash
    git switch -c <branch name>
@@ -14,64 +20,61 @@ The **lbbexley-requirements** skill turns what's in `docs/discovery/` into `docs
 
    For example `git switch -c see-free-rooms`. Not sure yet? Call it `first-story`.
 
-2. Start a new chat, choose the **lbbexley-plan** agent and ask:
+2. **Run the requirements skill.** Start a new chat, choose the **lbbexley-plan** agent, and ask:
 
    ```text
    Use the lbbexley-requirements skill.
    ```
 
-   It reads everything in `docs/discovery/`. To use one file, name it: *"Use the lbbexley-requirements skill with docs/discovery/transcript-1.md."*
-
-3. **If it stops for personal data**, it tells you which file and roughly where, without repeating it. Fix it as in [exercise 05](../05-capture-your-requirements.md), step 5, then ask again.
-4. **Answer its questions.** It asks what's missing, all at once. Answer what you can. For the rest, say who would know, for example:
+   It reads `AGENTS.md` and everything in `docs/discovery/`, sums up what it already knows, then asks about what's missing, all at once. Answer what you can. For the rest, say who would know, for example:
 
    ```text
    I don't know the peak volumes: list that as an open question for the service manager.
    ```
 
-5. Let it save `docs/requirements.md`. The plan agent is told to write only documents in `docs/`.
-6. **Read `docs/requirements.md` carefully.** Check that:
-   - the users and their needs are right, and each need is a need, not a solution
-   - each user story has one need, a priority (Must, Should, Could or Won't), and acceptance criteria someone can check, including accessibility
-   - every rule has a source, and every number matches what was said: nothing is invented
-   - open questions say who can answer them
-   - nobody is named, and nothing could identify a person
-7. **Ask for changes in plain words.** For example:
+   If it stops for personal data, it says which file and roughly where. Fix it as in [exercise 05](../05-capture-your-requirements.md), step 5, then ask again.
+
+3. **Open `docs/requirements.md` in VS Code and read it.** Check that:
+   - each need is a need, not a solution
+   - each user story has a priority (Must, Should, Could or Won't) and acceptance criteria someone can check, including accessibility
+   - nothing is invented: every rule has a source, and every number matches what was said
+   - each open question says who can answer it
+   - nobody is named
+4. **Ask for changes in plain words.** Copilot changes the file, and VS Code shows the new version. For example:
 
    ```text
-   Split R3 into two stories: one for the people who make requests, one for the officers who handle them.
    R5 is a Could, not a Must.
-   The 10-working-day rule comes from the team's service standards: add that as its source.
+   Split R3 into two stories: one for the people who make requests, one for the officers who handle them.
    ```
 
-8. **Ask the service owner to check it.** They don't need to read Markdown: copy the text into an email or Teams message, or show them the file on GitHub after exercise 11. Make their changes the same way.
-9. **Commit the requirements.** Check that nothing from `docs/discovery/` is included, then commit:
+5. **Commit it.** Run `git status` first: nothing in `docs/discovery/` should be listed. Then:
 
    ```bash
-   git status
    git add docs/requirements.md
    git commit -m "Add the requirements"
    ```
 
-10. **Turn the stories into issues.** Ask lbbexley-plan:
+6. **Turn the stories into issues.** Ask lbbexley-plan:
 
-    ```text
-    Draft an issue for each Must and Should story in docs/requirements.md.
-    ```
+   ```text
+   Draft an issue for each Must and Should story in docs/requirements.md.
+   ```
 
-    Read the drafts. The plan agent can't run commands, so to create them, choose **lbbexley-build** and ask: *"Create the issues drafted above with the GitHub CLI, one at a time."* Allow each `gh issue create` command. No GitHub CLI? Copy each draft into a new issue on GitHub, using the **Feature or change** form.
+   Read the drafts. The plan agent can't run commands, so to create them, choose **lbbexley-build** and ask: *"Create the issues drafted above with the GitHub CLI, one at a time."* Allow each `gh issue create` command. No GitHub CLI? Copy each draft into a new issue on GitHub, using the **Feature or change** form.
+
+7. **Ask the service owner to check it.** This can wait until after the session. They don't need to read Markdown: copy the text into an email or Teams message. When they agree, ask Copilot to record their role and the date at the top. Until then it says *draft, not yet agreed*, and that's right.
 
 ## Check
 
-- [ ] `docs/requirements.md` has users and needs, user stories with priorities and acceptance criteria, rules with sources, and open questions with owners
+- [ ] `docs/requirements.md` opens in VS Code, with users and needs, user stories with priorities and acceptance criteria, rules with sources, and open questions with owners
 - [ ] Nothing in it is invented, and nobody is named
 - [ ] It's committed on your branch, and `docs/discovery/` isn't
 - [ ] Your repository on GitHub has an issue for each Must and Should story
 
 ## What just happened
 
-- The requirements skill checked your material for personal data before it read anything else, and turned gaps into open questions rather than guessing.
-- Every later step starts from these requirements: the design reads them, and each plan starts from one story's user need and acceptance criteria.
+- The requirements skill checked your material for personal data before anything else, and turned gaps into open questions rather than guessing.
+- Every later step starts from this file: the design reads it, and each plan starts from one story.
 - One story per issue keeps changes small: each can be planned, built, checked and reviewed on its own.
 
 ---

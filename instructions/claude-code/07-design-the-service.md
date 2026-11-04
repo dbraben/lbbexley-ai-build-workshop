@@ -6,7 +6,7 @@
 
 ## Steps
 
-1. Check you're in plan mode and on the branch you made in exercise 06 (`git branch` shows it). You can keep the conversation or use `/clear`: the architect skill reads `docs/requirements.md` from the repository.
+1. **Go back to plan mode.** Press Shift+Tab until the line below the prompt says **⏸ plan mode on**: the design changes several files, so you see the plan first. Check you're on the branch you made in exercise 06 (`git branch` shows it).
 2. Run:
 
    ```text
@@ -16,7 +16,7 @@
    It starts from `docs/requirements.md`.
 
 3. Claude asks about anything the requirements leave open that changes the design: devices, a non-digital route, special category data, decisions about people, payments, other systems. Answer what you can. For the rest, say: *"Assume the simplest option and list it as an open decision."*
-4. Read the architecture it proposes, then approve the plan so it saves `docs/architecture.md`.
+4. **Read the plan.** It's the draft design: nothing is saved yet. Approve it with **Yes, manually approve edits**. Claude then saves `docs/architecture.md` and asks before each other change.
 5. Open `docs/architecture.md` and check:
    - each component has a reason. Push back if one hasn't earned its place: *"Why do we need Power Pages if only staff use it?"*
    - there's a non-digital route if residents use the service

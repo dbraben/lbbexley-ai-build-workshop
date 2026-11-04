@@ -33,7 +33,7 @@
    - runs the standards check on every file it changed, and sends it back to fix anything it finds
    - asks the **lbbexley:end-of-run-reviewer** agent, on Haiku, to review the changes for what the check can't see, such as wording and missing tests
 
-   When both are clean, Claude Code shows "Bexley end-of-run check passed".
+   Claude Code shows the request for the review as a **Stop hook error**. That's the check working, not a fault. The reviewer runs in the background, so you may see "the review on the smaller model is still running" while Claude waits for it. When the review reports, Claude carries on by itself and fixes anything it found. When both are clean, Claude Code shows "Bexley end-of-run check passed".
 6. Restart Claude Code so the Microsoft plugins it turned on are loaded: run `/exit`, then `claude`.
 7. Commit the set-up on a branch and open a pull request. Ask Claude to do it, or run:
 

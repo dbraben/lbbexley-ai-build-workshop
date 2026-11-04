@@ -2,7 +2,7 @@
 
 *About 10 minutes · No dev environment needed*
 
-The **lbbexley-review** skill is the definition of done before a pull request. It runs the standards check and the accessibility tests, reviews what tools can't check against the Bexley checklist, checks the compliance documents, and reports what passes, what to fix and what needs a person to test. Run it once per pull request, not after every change: it's the most thorough check, and the slowest.
+The **lbbexley-review** skill is the definition of done before a pull request. It runs the standards check, reviews what tools can't check against the Bexley checklist, checks the compliance documents, and reports what passes, what to fix and what needs a person to test. For anything people use, such as a screen or a page, it also runs the accessibility tests. Run it once per pull request, not after every change: it's the most thorough check, and the slowest.
 
 ## Steps
 
@@ -18,7 +18,7 @@ The **lbbexley-review** skill is the definition of done before a pull request. I
    - **Must fix:** fix every item, however minor. Ask the agent to fix them, then run the review again.
    - **Needs a person:** tests no tool can do for you, and sign-offs to ask for. You did the tests in exercise 10: check they're all in the test log.
 
-   Anything that couldn't run, such as accessibility tests with nothing to open yet, is reported as a gap, not a pass.
+   If you haven't built anything people use yet, it checks your documents only, and says the accessibility tests and the accessibility review don't apply. A screen or page you've built that the accessibility tests can't open is reported as a gap, not a pass.
 3. **Check the compliance documents** it mentions. If your story collects or shows information about people, the DPIA screening in `docs/compliance/dpia-screening.md` needs it. Ask the agent to draft the parts the review lists; the decisions stay as `{{...}}` for the service team.
 4. **Push your branch and open a pull request:**
 

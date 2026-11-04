@@ -112,7 +112,9 @@ Leave the original transcript and the roles file in Downloads until the service 
 
 ## Route B: your own requirement prompt
 
-1. Copy the template into your discovery folder. On a Mac or Linux:
+Make the prompt in VS Code, on your computer. Don't create it on GitHub: a file created there is published, and the assistant only sees what's on your computer.
+
+1. Copy the template into your discovery folder, in VS Code's terminal. On a Mac or Linux:
 
    ```bash
    cp .github/skills/lbbexley-requirements/requirement-prompt.md docs/discovery/requirement-prompt.md

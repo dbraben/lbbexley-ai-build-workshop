@@ -31,13 +31,20 @@ Each end-of-run review also asks whether the harness itself let you down: a mist
    > In a guided session, ask the facilitator before opening real issues in the standards repository. Otherwise, just read the text Claude drafts.
 
 5. Check that each idea is now ticked, with `(applied: ...)`, `(proposed: ...)` or `(dropped: ...)` after it. Commit the file and open a small pull request.
-6. **See how an update arrives.** Find the release your repository is on: it's the version after `@` on the `uses:` line in `.github/workflows/quality.yml`, such as `v0.3.0`. Then run the update with that version:
+6. **See how an update arrives.** Find the release your repository is on: it's the version after `@` on the `uses:` line in `.github/workflows/quality.yml`, such as `v0.3.2`. Then run the update with that version:
 
    ```bash
    npm run standards:update -- <the version in quality.yml>
    ```
 
    Your repository is already on that release, so nothing changes. When the Digital Team announces a newer release, run the same command with the new version, always in a pull request of its own.
+
+   Claude Code's plugin updates separately. When there's a new release, run these in a terminal, then start Claude Code again:
+
+   ```bash
+   claude plugin marketplace update lbbexley-digital
+   claude plugin update lbbexley@lbbexley-digital
+   ```
 
 ## Check
 
