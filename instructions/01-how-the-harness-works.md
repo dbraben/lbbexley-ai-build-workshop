@@ -64,7 +64,7 @@ The copies are synced from the standards repository at the release your reposito
 | Where | What | Who changes it |
 |---|---|---|
 | `AGENTS.md` (and `CLAUDE.md`) | Your service's details and the rules that always apply. Both assistants read it first | You, through the set-up in exercise 04 |
-| `docs/discovery/` | Cleaned meeting transcripts, notes and your requirement prompt | You. **It stays on your computer**: Git ignores everything here except the README |
+| `docs/discovery/` | Cleaned meeting transcripts, notes and your requirement prompt | You. Git ignores everything here except the README, but approved AI tools may still read and process its contents, so only cleaned material goes in |
 | `docs/requirements.md` | Users, user stories with acceptance criteria, rules, data, duties and open questions | The requirements skill, checked by the service owner |
 | `docs/architecture.md` | The design: components, data flow, duties, diagram | The architect skill |
 | `docs/plans/` | One plan per change | The plan skill |

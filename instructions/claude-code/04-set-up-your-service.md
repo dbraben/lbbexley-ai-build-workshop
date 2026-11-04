@@ -25,7 +25,7 @@
    | Personal data | What the real service will handle, in general terms. Never real examples | Staff names and teams |
    | AI | An agent, AI Builder, AI prompts in flows, or none | None |
 
-   Not sure about an answer? Say so: Claude records it, and you can change it after you've written the requirements.
+   Not sure about an answer? Say so: "not decided yet" for what you're building, or "no environment yet" for the dev environment, are normal answers at this stage. Claude records them, and the design step settles them. You can change anything after you've written the requirements.
 
 3. Because the session is in plan mode, Claude shows what it's going to change before changing anything. Read the plan, then approve it with **Yes, manually approve edits**, so you see each change.
 4. Approve the edits and commands as they come. It installs the test tools with `npm install` and `npm run test:a11y:install`.
@@ -55,7 +55,7 @@
 ## Check
 
 - [ ] `AGENTS.md` and `README.md` describe your service, with no `{{...}}` placeholders left
-- [ ] The compliance documents in `docs/compliance/` name your service
+- [ ] The compliance documents in `docs/compliance/` name your service. Any that depend on a decision you haven't made yet say "To be confirmed after the design."
 - [ ] Claude Code showed "Bexley end-of-run check passed" before it finished
 - [ ] The pull request passed **Bexley standards** and is merged
 

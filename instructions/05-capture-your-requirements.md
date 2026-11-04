@@ -2,15 +2,16 @@
 
 *About 20 minutes, or before the session · Both tracks · No dev environment needed*
 
-Requirements come from the people who run and use the service, in their own words. In this exercise you put those words into `docs/discovery/` in your repository, ready for the requirements skill in exercise 06. Choose one route, or do both:
+Requirements come from the people who run and use the service, in their own words. Some of those words you've already given the assistant, in exercise 04. In this exercise you decide what to add, and put it into `docs/discovery/` in your repository, ready for the requirements skill in exercise 06. Choose one or more routes:
 
 | Route | Use it when | You'll end up with |
 |---|---|---|
+| **C. Reuse what you've already told the assistant** | You described the service in exercise 04. This is the quickest route, and needs nothing more | Nothing extra: the set-up saved your answers to `docs/discovery/service-introduction.md`. Check it, and remove anything that shouldn't be there |
 | **A. A Teams meeting transcript** | You've recorded, or can record, a conversation with the people who run the service. The best source | `docs/discovery/transcript-1.md`: the conversation with roles instead of names |
 | **B. Your own requirement prompt** | You know the project well, or want to add what the meeting didn't cover | `docs/discovery/requirement-prompt.md`: your project in your own words |
 
 > [!IMPORTANT]
-> Everything in `docs/discovery/` stays on your computer: Git ignores it. But the assistant can read anything in your repository's folder, so only cleaned material ever goes there. Never put an original transcript, a recording or a roles file in your repository.
+> Git ignores everything in `docs/discovery/`, so it's never committed or pushed. But that doesn't make it private from AI: approved AI tools may still read and process its contents. So only cleaned material ever goes there. Never put an original transcript, a recording or a roles file in your repository.
 
 ## Route A: a Teams meeting transcript
 
@@ -51,7 +52,7 @@ The same command works in PowerShell and in a Mac or Linux terminal. You'll see 
 
 ```text
 Cleaned: 3 speakers, 41 paragraphs.
-Saved: docs/discovery/transcript-1.md (it stays on your computer: docs/discovery/ is never committed)
+Saved: docs/discovery/transcript-1.md (Git ignores docs/discovery/, but approved AI tools may still read it, so keep it clean)
 Removed: 2 email addresses, 1 phone number.
 3 speakers are still called "Speaker" and a number. To use roles instead, such as "Service manager", edit this file and run this again:
   /Users/<you>/Downloads/<transcript file>.roles.json
@@ -134,7 +135,7 @@ Leave the original transcript and the roles file in Downloads until the service 
 
 ## Check
 
-- [ ] `docs/discovery/` has a cleaned `transcript-1.md`, a `requirement-prompt.md`, or both
+- [ ] `docs/discovery/` has what you chose: `service-introduction.md` (from exercise 04), a cleaned `transcript-1.md`, a `requirement-prompt.md`, or a mix
 - [ ] Every speaker is named by role, and you've read the transcript through and removed anything that could identify someone
 - [ ] `git status` doesn't list anything in `docs/discovery/`
 - [ ] The original transcript and the roles file are in Downloads, not in your repository

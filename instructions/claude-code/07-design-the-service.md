@@ -6,7 +6,7 @@
 
 ## Steps
 
-1. Run `/clear`, and check you're in plan mode and on the branch you made in exercise 06 (`git branch` shows it).
+1. Check you're in plan mode and on the branch you made in exercise 06 (`git branch` shows it). You can keep the conversation or use `/clear`: the architect skill reads `docs/requirements.md` from the repository.
 2. Run:
 
    ```text
@@ -23,7 +23,7 @@
    - the duties table covers accessibility and every other duty that applies, with what the design does about each
    - the risks and open decisions are listed, with who decides
    - the diagram is in a ```mermaid block. GitHub draws it; in VS Code, a Mermaid preview extension does
-6. If the design changed what you're building, update `AGENTS.md` to match. Ask Claude: *"Update 'Built with' in AGENTS.md to match the architecture."*
+6. **Reconcile the configuration.** A design can change more than the component list. Ask Claude: *"Reconcile the configuration with docs/architecture.md, as the architect skill describes."* It brings the Microsoft plugins, the compliance documents, the accessibility test targets, the environment settings and "Built with" in `AGENTS.md` into line with the design, and tells you what it changed and what's still open. If there's no dev environment yet, that's expected: it records that the environment is still to be set up.
 7. Commit it on your branch:
 
    ```bash
