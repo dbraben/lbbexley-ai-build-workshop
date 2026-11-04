@@ -43,6 +43,10 @@ Both tracks use the same standards and produce the same documents. The commands 
 - Prompts in grey boxes are a starting point. Change the wording to fit your project.
 - Each exercise ends with a **Check** list. Don't move on until everything on it is ticked.
 
+## Returning to an existing project?
+
+Don't rerun the introductory questions in exercise 04. Ask the assistant where the project is: it reads the saved state (`AGENTS.md`, `docs/discovery/`, `docs/requirements.md`, `docs/architecture.md`) and resumes at the next exercise that isn't finished. For example: *"Where am I in the workshop for this project? Resume at the next incomplete stage."*
+
 ## The rules for the whole workshop
 
 - **Your project, fictional data.** Build your real project, but test it only with made-up data. Never type, paste or upload real resident or staff information.

@@ -6,7 +6,7 @@
 
 ## Steps
 
-1. Run `/clear` to start a fresh conversation, and check you're in plan mode.
+1. Check you're in plan mode. You can keep this conversation or start a new one with `/clear`: the requirements skill reads the saved files, so nothing you've already said is lost.
 2. Make a branch for the work in exercises 06 to 11, named after your first piece of work, in lower case with hyphens:
 
    ```bash
@@ -24,7 +24,7 @@
    It reads everything in `docs/discovery/`. To use one file, name it: `/lbbexley:requirements docs/discovery/transcript-1.md`.
 
 4. **If it stops for personal data**, it tells you which file and roughly where, without repeating it. Fix it as in [exercise 05](../05-capture-your-requirements.md), step 5, then run the command again.
-5. **Answer its questions.** It asks what's missing, all at once. Answer what you can. For the rest, say who would know, for example:
+5. **Answer its questions.** It first sums up what it already knows from your set-up answers and `docs/discovery/`, then asks only about what's missing or contradicts. Answer what you can. For the rest, say who would know, for example:
 
    ```text
    I don't know the peak volumes: list that as an open question for the service manager.
@@ -45,7 +45,7 @@
    The 10-working-day rule comes from the team's service standards: add that as its source.
    ```
 
-9. **Ask the service owner to check it.** They don't need to read Markdown: copy the text into an email or Teams message, or show them the file on GitHub after exercise 11. Make their changes the same way.
+9. **Ask the service owner to check it.** They don't need to read Markdown: copy the text into an email or Teams message, or show them the file on GitHub after exercise 11. Make their changes the same way. When they agree, ask Claude to record their role and the date in the status line at the top. Until then it says *draft, not yet agreed*, and that's correct.
 10. **Commit the requirements.** Check that nothing from `docs/discovery/` is included, then commit:
 
     ```bash

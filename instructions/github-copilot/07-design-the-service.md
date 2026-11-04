@@ -21,7 +21,7 @@ The **lbbexley-architect** skill designs the service from your requirements: who
    - the duties table covers accessibility and every other duty that applies, with what the design does about each
    - the risks and open decisions are listed, with who decides
    - the diagram is in a ```mermaid block. GitHub draws it; in VS Code, a Mermaid preview extension does
-6. If the design changed what you're building, choose **lbbexley-build** (the plan agent only writes in `docs/`) and ask: *"Update 'Built with' in AGENTS.md to match the architecture."*
+6. **Reconcile the configuration.** A design can change more than the component list. Choose **lbbexley-build** (the plan agent only writes in `docs/`) and ask: *"Reconcile the configuration with docs/architecture.md, as the architect skill describes."* It brings the Microsoft plugins, the compliance documents, the accessibility test targets, the environment settings and "Built with" in `AGENTS.md` into line with the design, and says what it changed and what's still open.
 7. Commit it on your branch:
 
    ```bash
