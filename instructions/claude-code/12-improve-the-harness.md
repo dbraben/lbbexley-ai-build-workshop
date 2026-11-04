@@ -28,15 +28,19 @@ Each end-of-run review also asks whether the harness itself let you down: a mist
 
 ## When there's a new release
 
-You don't need to do this today. When the Digital Team announces a new release of the standards, such as `v0.5.0`:
+You don't need to do this today. When the Digital Team announces a new release of the standards, such as `v0.6.0`:
 
-1. Ask Claude: *"Update the Bexley standards to v0.5.0."* It runs `npm run standards:update -- v0.5.0`, which updates the synced Bexley files and the release the check on GitHub uses. Approve the command. Keep the update on its own, with no other work in the same request, so it's committed as a change of its own.
-2. Update Claude Code's plugin. Run these in a terminal, then start Claude Code again:
+1. Ask Claude: *"Update the Bexley standards to v0.6.0."* It runs `npm run standards:update -- v0.6.0`, which updates the synced Bexley files, the release the check on GitHub uses and the release Claude Code installs the plugin from, and then moves the plugin to that release. Approve the command. Keep the update on its own, with no other work in the same request, so it's committed as a change of its own.
+2. Start Claude Code again (`/exit`, then `claude`), so it loads the new plugin.
 
-   ```bash
-   claude plugin marketplace update lbbexley-digital
-   claude plugin update lbbexley@lbbexley-digital
-   ```
+If the update says it couldn't move the plugin, run the two commands it gives you in a second terminal, then start Claude Code again. For `v0.6.0` they are:
+
+```bash
+claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.6.0 --scope local
+claude plugin update lbbexley@lbbexley-digital
+```
+
+To check, run `claude plugin list`: the **Version** under `lbbexley@lbbexley-digital` is 0.6.0.
 
 ## Check
 

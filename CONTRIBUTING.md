@@ -30,7 +30,7 @@ Attendees work on their own projects. That's the point of the workshop, so keep 
 ## When the harness has a new release
 
 1. Read the standards repository's CHANGELOG for that release.
-2. Update the version this workshop names: in `README.md` ("These instructions match") and in exercise 02's table, which gives an example release.
+2. Update the version this workshop names: in `README.md` ("These instructions match"), exercise 02's table, which gives an example release, the plugin commands in Claude Code's exercise 03 and in the facilitator guide, which name the release, and the later release that exercise 12 uses as an example, on both tracks.
 3. Run through every exercise on both tracks, and fix anything that changed: command names, skill names, handover buttons, messages, the requirements questions and the answers table's first line (exercise 05), and what the transcript cleaner prints (the transcript page).
 4. Update the facilitator guide's common problems.
 

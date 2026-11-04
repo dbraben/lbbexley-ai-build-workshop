@@ -18,13 +18,19 @@ Claude Code gets the Bexley standards from the **lbbexley** plugin, which it ins
 2. When Claude Code asks whether you trust this folder, say yes. It then offers to add the plugin marketplaces listed in `.claude/settings.json` (**lbbexley-digital** and **power-platform-skills**) and to turn on the **lbbexley** plugin. Accept both.
 
    > [!TIP]
-   > No offer? Add them yourself:
-   > ```text
-   > /plugin marketplace add dbraben/lbbexley-digital-standards
-   > /plugin install lbbexley@lbbexley-digital
+   > No offer? Add the plugin yourself, for this computer only. Type `/exit`, run these two commands in the same terminal, then start Claude Code again with `claude`. `v0.5.0` is your repository's release: use the one in `.github/workflows/quality.yml`.
+   > ```bash
+   > claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.5.0 --scope local
+   > claude plugin install lbbexley@lbbexley-digital --scope local
    > ```
 
-3. Check the plugin is on: run `/plugin`. **lbbexley** is listed as enabled.
+3. Check the plugin is on: run `/plugin`. **lbbexley** is listed as enabled. Then check it's the release your repository is on: open a second terminal (**Terminal**, then **New Terminal**) and run `claude plugin list`. The **Version** under `lbbexley@lbbexley-digital` matches the release in `.github/workflows/quality.yml`: version 0.5.0 for `v0.5.0`. If it doesn't, move it to your repository's release with these two commands in the second terminal, then start Claude Code again:
+
+   ```bash
+   claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.5.0 --scope local
+   claude plugin update lbbexley@lbbexley-digital
+   ```
+
 4. Type `/lbbexley` and look at the commands it offers, including `requirements`, `architect`, `plan`, `review`, `improve` and `new-app`. You'll use each of them on your project.
 5. Run `/agents`. The plugin adds three read-only reviewers: `lbbexley:accessibility-reviewer`, `lbbexley:compliance-reviewer` and `lbbexley:end-of-run-reviewer`.
 6. **Check the model.** The project's `.claude/settings.json` sets `opusplan`: Opus while you plan, Sonnet once you approve the plan and build. Claude Code calls it **Opus Plan**, so you won't see the word `opusplan`:
@@ -42,7 +48,7 @@ Claude Code gets the Bexley standards from the **lbbexley** plugin, which it ins
 
 ## Check
 
-- [ ] `/plugin` shows **lbbexley** enabled
+- [ ] `/plugin` shows **lbbexley** enabled, and `claude plugin list` shows the release in `quality.yml`
 - [ ] `/agents` lists the three lbbexley reviewers
 - [ ] `/model` has **Opus Plan Mode** ticked, and the session is in plan mode
 - [ ] The guard stopped the message with the email address

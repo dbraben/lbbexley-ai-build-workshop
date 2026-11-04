@@ -33,6 +33,9 @@ Every change starts with a plan, on the strongest model. A Bexley plan has the u
    formula holding a few rows of made-up sample data instead of Dataverse.
    ```
 
+   > [!NOTE]
+   > Skipped exercise 07, so there's no design yet? Add this line to the end of the request, so lbbexley-plan doesn't stop to offer one first: *"There's no design yet: plan the story from the requirements."*
+
 4. The agent uses the **lbbexley-plan** skill and writes the plan to `docs/plans/`. It reads `AGENTS.md`, `docs/requirements.md`, `docs/architecture.md` and the skill for your platform first.
 5. **Read the plan.** Check it has:
    - the user need, from the story

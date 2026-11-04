@@ -38,16 +38,25 @@ Claude Code is running in VS Code's terminal, so run the commands below in a sec
    pac auth create --environment https://<your-dev-environment>.crm11.dynamics.com
    ```
 
-3. **Connect the Dataverse MCP server** if your story uses Dataverse. Set your dev environment's address, then restart VS Code. In PowerShell:
+3. **Connect the Dataverse MCP server** if your story uses Dataverse.
+
+   **On Windows**, set your dev environment's address, then restart VS Code. In PowerShell:
 
    ```powershell
    setx DATAVERSE_DEV_URL "https://<your-dev-environment>.crm11.dynamics.com"
    ```
 
-   When Claude Code asks whether to use the MCP servers in `.mcp.json`, approve **dataverse**. Run `/mcp` to check it's connected.
+   When Claude Code asks whether to use the MCP servers in `.mcp.json`, approve **dataverse**.
 
-   > [!NOTE]
-   > The template starts the Dataverse server through `cmd`, which is for Windows. On a Mac, ask the facilitator.
+   **On a Mac or Linux**, the template's server starts through Windows' `cmd`, so add your own instead, for this computer only. Run this in the second terminal, with your dev environment's address, then start Claude Code again:
+
+   ```bash
+   claude mcp add --scope local dataverse -- npx -y @microsoft/dataverse mcp https://<your-dev-environment>.crm11.dynamics.com
+   ```
+
+   It takes the place of the template's **dataverse** server in this repository. Nothing in the repository changes.
+
+   Then run `/mcp` to check **dataverse** is connected.
 
 4. **Get the solution's source.** Ask Claude: *"Clone the solution named in AGENTS.md into src/solution."* It runs `pac solution clone`: approve it.
 

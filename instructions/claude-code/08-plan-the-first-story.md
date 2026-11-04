@@ -36,6 +36,9 @@ Every change starts with a plan, on the strongest model. A Bexley plan has the u
    formula holding a few rows of made-up sample data instead of Dataverse.
    ```
 
+   > [!NOTE]
+   > Skipped exercise 07, so there's no design yet? Add this line to the end of the request, so it plans straight from the requirements: *"There's no design yet: plan the story from the requirements."*
+
 4. Claude uses the plan skill, which runs on Opus. It reads `AGENTS.md`, `docs/requirements.md`, `docs/architecture.md` and the skill for your platform, then writes the plan.
 5. **Read the plan.** Check it has:
    - the user need, from the story

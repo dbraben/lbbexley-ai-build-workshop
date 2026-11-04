@@ -28,16 +28,19 @@ You need something to open: a page or screen in your dev environment.
 
 1. Get the address:
    - **Canvas app:** in Power Apps, open your app's **Details** and copy its **Web link**. It looks like `https://apps.powerapps.com/play/e/<environment-id>/a/<app-id>?tenantId=<tenant-id>`. Add `&hidenavbar=true` to the end.
-   - **Power Pages:** the page's path on your dev site, such as `/<page path>`. The tests also need the site's address, which you give them in step 4.
+   - **Power Pages:** the page's full address on your dev site, such as `https://<your-dev-site>.powerappsportals.com/<page path>`.
    - **Model-driven app:** the form's address from your browser.
 2. Ask Claude to add it:
 
    ```text
    Add my <screen or page name> to tests/accessibility/targets.json: type <canvas, page or
-   model-driven>, auth true, waitFor "<the heading on the screen>", and this URL: <the address>
+   model-driven>, auth <true or false>, waitFor "<the heading on the screen>", and this URL:
+   <the full address>
    ```
 
-3. Save a sign-in for the tests. Claude Code is running in VS Code's terminal, so open a second one (**Terminal**, then **New Terminal**), and run this there. A browser opens: sign in with your test account, not your own.
+   `auth` is `true` for a canvas or model-driven app, and for a Power Pages page that people have to sign in to see. For a public page it's `false`: skip step 3.
+
+3. Save a sign-in for the tests. Claude Code is running in VS Code's terminal, so open a second one (**Terminal**, then **New Terminal**), and run this there. A browser opens at your page or screen: sign in with your test account, not your own.
 
    ```bash
    npm run test:a11y:login
@@ -45,9 +48,9 @@ You need something to open: a page or screen in your dev environment.
 
    The sign-in is saved in `.auth/a11y-state.json`. It's a secret: Git ignores it, the assistant never commits it, and you must never share it. Sign-ins expire, so run this again when the tests say so.
 
-4. Ask Claude to run the tests: *"Run the accessibility tests."* For a Power Pages page, give it your dev site's address: *"Run the accessibility tests against https://<your-dev-site>.powerappsportals.com."*
+4. Ask Claude to run the tests: *"Run the accessibility tests."*
 
-   They check for any WCAG 2.2 A or AA violation, and for Power Pages also sideways scrolling at 320 pixels wide and a visible focus indicator on every tab stop. If anything fails, ask Claude to explain and fix it, then run the tests again until they pass.
+   They check for any WCAG 2.2 A or AA violation, and for Power Pages also sideways scrolling at 320 pixels wide and a visible focus indicator on every tab stop. If anything fails, ask Claude to explain and fix it, then run the tests again until they pass. If a test says it needs a saved sign-in, or that it opened a sign-in page, do step 3 again: nothing was tested, so it can't pass.
 
 ## 3. Test it yourself
 

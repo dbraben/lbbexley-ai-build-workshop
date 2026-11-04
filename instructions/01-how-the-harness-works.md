@@ -53,12 +53,12 @@ Along the way, guardrails stop the assistant doing things it shouldn't: deployin
 
 | | Claude Code | GitHub Copilot |
 |---|---|---|
-| Skills (brand, accessibility, content style, the legal duties, one per platform, and requirements, architect, plan, review, improve) | The **lbbexley** plugin, installed from the standards repository | Copies in `.github/skills/lbbexley-*` |
+| Skills (brand, accessibility, content style, the legal duties, one per platform, and requirements, architect, plan, review, improve) | The **lbbexley** plugin, installed from the standards repository at the same release | Copies in `.github/skills/lbbexley-*` |
 | Plan, build and check | Plan mode with `opusplan`: Opus plans, Sonnet builds, Haiku reviews | The **lbbexley-plan**, **lbbexley-build** and **lbbexley-check** agents, which hand over to each other |
 | Standards check after each save, and the end-of-run check | Plugin hooks | Copilot hooks (a preview feature) in `.github/hooks/lbbexley.json` |
 | Rules for particular files | `.claude/rules/lbbexley-*` | `.github/instructions/lbbexley-*` |
 
-The copies are synced from the standards repository at the release your repository is on, so both assistants follow identical rules.
+The copies are synced from the standards repository at the release your repository is on, and Claude Code installs the plugin from that release too, so both assistants follow identical rules.
 
 ## Where things live in your repository
 
@@ -92,7 +92,7 @@ That's the path you'll follow in exercises 05 to 11, with your own project.
 Open [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template) on GitHub and find:
 
 1. `AGENTS.md`: the **Never** list. Which commands can't the assistant run?
-2. `.github/workflows/quality.yml`: the line with `uses:`. Which release of the standards does the check on GitHub use?
+2. `.github/workflows/quality.yml`: the line with `uses:`. Which release of the standards does the check on GitHub use? Find the same release in `.claude/settings.json`.
 3. `docs/discovery/.gitignore`: why does it contain a single `*`?
 4. `.claude/settings.json`: the `allow`, `ask` and `deny` lists. Which Git commands can Claude run without asking you, and which does it ask about? Which file types can't it read?
 5. `.github/skills/`: is there a skill for each platform you might use in your project?
