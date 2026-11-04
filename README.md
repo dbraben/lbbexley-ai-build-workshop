@@ -49,7 +49,7 @@ You need:
 
 - a project of your own, and ideally a recorded Teams conversation with the people who run the service
 - a GitHub account, and access to [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template) and [lbbexley-digital-standards](https://github.com/dbraben/lbbexley-digital-standards)
-- Claude Code with a Claude Pro or Max subscription, or GitHub Copilot with agent mode in VS Code
+- Claude Code's command-line version with a Claude Pro or Max subscription, or GitHub Copilot with agent mode in VS Code
 - VS Code, Git and Node.js 22 or later
 - for building in a dev environment: a Power Platform dev environment with Dataverse and the Bexley publisher, from the Digital Team
 

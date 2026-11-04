@@ -33,7 +33,7 @@ They can't clean a transcript until they've created their repository in exercise
 ### The day before
 
 - Run exercises 00 to 06 yourself on both tracks, on the release you'll use, with a project of your own and a short recorded meeting. Assistants, VS Code, Teams and the harness all change.
-- Check attendees' machines have the tools in exercise 00 installed. The template's `.mcp.json` starts the Dataverse server through `cmd`, so building with Dataverse from Claude Code assumes Windows.
+- Check attendees' machines have the tools in exercise 00 installed, including Claude Code's command-line version for the Claude Code track: `claude --version` works in VS Code's terminal. The template's `.mcp.json` starts the Dataverse server through `cmd`, so building with Dataverse from Claude Code assumes Windows.
 - Have a few prompts ready to help anyone who arrives without a project choose one in five minutes, such as "What's the most annoying manual process in your team?" and "What do people email your team about most?"
 
 ## Running orders
@@ -95,7 +95,10 @@ They can't clean a transcript until they've created their repository in exercise
 | The requirements skill stops for personal data | It's doing its job. The attendee finds the place it describes and fixes it by hand, then runs it again |
 | Copilot's plan agent can't create issues | It can't run commands. Choose lbbexley-build and ask it to create the drafted issues, or create them by hand |
 | Claude Code didn't offer to install the plugin | Trust the folder, then `/plugin marketplace add dbraben/lbbexley-digital-standards` and `/plugin install lbbexley@lbbexley-digital` |
-| Claude Code doesn't start in plan mode in VS Code | Set `claudeCode.initialPermissionMode` to `plan` in VS Code user settings |
+| There's no **Use this template** button | The attendee isn't signed in to GitHub. Or give them the link in exercise 02, which opens the same page |
+| `claude` isn't found in VS Code's terminal | Only the VS Code extension is installed, and it doesn't add `claude` to the terminal. Install the command-line version (exercise 00), then open a new terminal |
+| `/model` doesn't show `opusplan` | Claude Code calls it **Opus Plan Mode**. It's the last option, and it's only listed while it's the model in use. If it isn't there, type `/model opusplan` |
+| Claude Code doesn't start in plan mode | The attendee is using the Claude Code panel, which never takes its starting mode from the project. Run `claude` in VS Code's terminal instead, or set `claudeCode.initialPermissionMode` to `plan` in VS Code user settings |
 | Copilot doesn't list the lbbexley agents | Check the workspace is trusted, Agent mode is on, and VS Code is up to date |
 | The Copilot hooks don't run | They're a preview feature: check `chat.useHooks` is on and VS Code is up to date. Meanwhile, run `npm run check` and hand over to lbbexley-check by hand |
 | A model on an agent's list isn't available | Copilot uses the next one on the list. Tell attendees which model they're getting |

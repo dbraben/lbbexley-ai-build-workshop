@@ -27,14 +27,14 @@
 
    Not sure about an answer? Say so: Claude records it, and you can change it after you've written the requirements.
 
-3. Because the session is in plan mode, Claude shows what it's going to change before changing anything. Read the plan, then approve it with **Yes, and manually approve edits**, so you see each change.
+3. Because the session is in plan mode, Claude shows what it's going to change before changing anything. Read the plan, then approve it with **Yes, manually approve edits**, so you see each change.
 4. Approve the edits and commands as they come. It installs the test tools with `npm install` and `npm run test:a11y:install`.
 5. Watch the end of the run. Before Claude can finish, the end-of-run check:
    - runs the standards check on every file it changed, and sends it back to fix anything it finds
    - asks the **lbbexley:end-of-run-reviewer** agent, on Haiku, to review the changes for what the check can't see, such as wording and missing tests
 
    When both are clean, Claude Code shows "Bexley end-of-run check passed".
-6. Restart Claude Code so the Microsoft plugins it turned on are loaded: run `/exit` and start Claude Code again.
+6. Restart Claude Code so the Microsoft plugins it turned on are loaded: run `/exit`, then `claude`.
 7. Commit the set-up on a branch and open a pull request. Ask Claude to do it, or run:
 
    ```bash

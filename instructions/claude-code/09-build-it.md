@@ -6,7 +6,7 @@ Now Claude builds what you planned, on Sonnet. Watch the checks as it works: the
 
 Follow the route for what your plan builds. Each route starts the same way:
 
-- Approve the plan with **Yes, and manually approve edits**, so you see each change.
+- Approve the plan with **Yes, manually approve edits**, so you see each change.
 - After each save, read what the standards check says: "Bexley standards check passed for ..." means the file is clean. A list of problems means Claude must fix them straight away, however minor, and it does.
 - At the end, the end-of-run check runs. When Claude Code shows "Bexley end-of-run check passed", the run is finished.
 

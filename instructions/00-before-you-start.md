@@ -52,7 +52,11 @@ You need at least one of these. Exercise 05 shows how to use each one.
 
 Then, for your track:
 
-- **Claude Code track:** install the Claude Code extension for VS Code (or the command-line version), and sign in with your Claude Pro or Max account.
+- **Claude Code track:** install Claude Code's command-line version. The exercises run it in VS Code's terminal. In a terminal, run the command for your computer:
+  - Mac, Linux or WSL: `curl -fsSL https://claude.ai/install.sh | bash`
+  - Windows, in PowerShell: `irm https://claude.ai/install.ps1 | iex`
+
+  Open a new terminal and run `claude --version` to check it, then run `claude` and sign in with your Claude Pro or Max account. The Claude Code extension for VS Code is optional: it doesn't add `claude` to the terminal.
 - **GitHub Copilot track:** install GitHub Copilot Chat in VS Code, sign in with your GitHub account, and check that the chat view offers **Agent** mode.
 
 If you'll build in a dev environment in exercise 09, also install:
@@ -89,7 +93,7 @@ To build in a dev environment in exercise 09, you also need:
 - [ ] You've chosen a project, and you can say in one sentence what it's for
 - [ ] You have a recorded Teams meeting, notes, or enough in your head to write a requirement prompt
 - [ ] `git --version` and `node --version` work, and Node.js is 22 or later
-- [ ] Your assistant is installed and signed in, and your AI account's privacy settings are set
+- [ ] Your assistant is installed and signed in (for Claude Code, `claude --version` works in a new terminal), and your AI account's privacy settings are set
 - [ ] You can open both repositories on GitHub
 
 ---

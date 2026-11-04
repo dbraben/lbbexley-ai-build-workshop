@@ -7,10 +7,10 @@ Every Bexley service has its own repository, made from the app template. You mak
 ## Steps
 
 1. **Choose a name.** Use `lbbexley-` followed by a short, plain-English name for your service, in lower case with hyphens. For example `lbbexley-room-bookings` or `lbbexley-tree-works-requests`. Name it after what the service does for people, not the technology.
-2. **Create it.** Open [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template) on GitHub and select **Use this template**, then **Create a new repository**.
+2. **Create it.** Sign in to GitHub, then open [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template). Select the green **Use this template** button at the top right, beside **Star**, then **Create a new repository**. The button only shows when you're signed in. If you can't find it, [this link](https://github.com/dbraben/lbbexley-app-template/generate) opens the same page.
    - Owner: your own account (or your team's, if you have one)
    - Repository name: the name you chose
-   - Visibility: **Private**
+   - Visibility: **Private**. Check it, because the page may start on Public
 
    Select **Create repository**.
 
