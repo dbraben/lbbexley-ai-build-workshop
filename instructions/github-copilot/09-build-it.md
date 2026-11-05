@@ -6,7 +6,7 @@ Now **lbbexley-build** builds what you planned, on the everyday model, directly 
 
 ## Set up your dev environment once
 
-1. **Create the solution.** In [Power Apps](https://make.powerapps.com), open your dev environment, then **Solutions**, then **New solution**. Use the solution name from `AGENTS.md`, and the Bexley publisher (prefix `lbbexley`).
+1. **Create the solution.** In [Power Apps](https://make.powerapps.com), open your dev environment, then **Solutions**, then **New solution**. Use the solution name from `AGENTS.md`, and the Bexley publisher (prefix `lbbexley`). Then select the solution and choose **Set preferred solution**, so anything you create in Power Apps lands in it.
 2. **Sign in to the Power Platform CLI**, in VS Code's terminal, with your environment's address. A browser opens for you to sign in:
 
    ```bash
@@ -35,7 +35,7 @@ Now **lbbexley-build** builds what you planned, on the everyday model, directly 
    **A Copilot Studio agent.** In [Copilot Studio](https://copilotstudio.microsoft.com), in your dev environment, create the agent, named for its one job, and make sure it's in your solution: in Power Apps, open the solution and use **Add existing** if it isn't there. Add its knowledge: the bexley.gov.uk pages about your service, or documents the service owner has approved, with general knowledge and web search turned off. Then open the Copilot Studio extension's **Agents** view, choose your environment, right-click the agent, select **Clone agent** and choose `src/agent/` in your repository.
 
 > [!TIP]
-> VS Code may ask the first time the agent uses each tool or command. For the tools above, and for `pac solution sync`, `git commit` and `git push`, choose to always allow them in this workspace. Never allow a delete, or anything aimed at another environment.
+> VS Code may ask the first time the agent uses each tool or command. For the tools above, and for `pac solution sync`, `pac solution add-solution-component`, `git commit` and `git push`, choose to always allow them in this workspace. Never allow a delete, or anything aimed at another environment.
 
 ## Build it
 
@@ -44,14 +44,14 @@ Now **lbbexley-build** builds what you planned, on the everyday model, directly 
 
    | You're building | What lbbexley-build does | Try this |
    |---|---|---|
-   | Dataverse tables | Creates the tables and columns, and a few made-up records, through the Dataverse MCP server | Ask it to delete one of the records. The Bexley hooks block it: deletes are never allowed through the assistant |
+   | Dataverse tables | Creates the tables and columns, and a few made-up records, through the Dataverse MCP server, then adds each table to the solution | Ask it to delete one of the records. The Bexley hooks block it: deletes are never allowed through the assistant |
    | A canvas app screen | Brings the app into `src/canvas/<AppName>/`, writes the screen there, and compiles it into the app: it appears in the Power Apps Studio tab | In Studio, play the app. Move through the screen with the Tab key only, and check every control shows a clear focus border |
-   | A flow | Builds it in your dev environment, inside the solution, with Microsoft's Power Automate tools | The hooks ask you before the flow runs, because a run can send real emails or messages: test only with made-up data and your own address. Ask it to delete the flow: that's blocked too |
+   | A flow | Builds it in your dev environment with Microsoft's Power Automate tools, then adds it to the solution with `pac solution add-solution-component` | The hooks ask you before the flow runs, because a run can send real emails or messages: test only with made-up data and your own address. Ask it to delete the flow: that's blocked too |
    | A model-driven app | Creates the tables and columns, as above | Build the app, its form and its views in the app designer yourself, keeping Microsoft's standard forms and theme. Then ask lbbexley-build to use the lbbexley-sync skill |
    | A Power Pages page | Works on the page in `src/pages/`, then uploads it to the dev site with `pac pages upload`: the hooks check it's the dev environment first | Watch the standards check on each page: the page title, the language, labels, heading order and no tracking scripts |
    | A Copilot Studio agent | Edits the agent's `.mcs.yml` files in `src/agent/`. The standards check rejects emoji, real-looking personal data, placeholder text and card images without alt text | Apply the changes with the Copilot Studio extension, then test the agent in Copilot Studio with every question in `tests/agent-test-set.md`. Ask lbbexley-build to update `docs/compliance/atrs-record.md` with the lbbexley-ai-transparency skill |
 
-3. **Bring in the latest version.** Before the agent finishes, it runs `pac solution sync` into `src/solution`. If hooks are on and it hasn't, the end-of-run gate asks it to.
+3. **Bring in the latest version.** Before the agent finishes, it adds any new flow or table to the solution and runs `pac solution sync` in `src/solution/<solution>/`. If hooks are on and it hasn't, the end-of-run gate asks it to.
 4. **Check, commit and push.** Select **Check my work**: lbbexley-check reviews the changes on a smaller model. If it reports problems, select **Fix what the check found**: lbbexley-build fixes them in the dev environment and syncs again. Then select **Check my work** again. When it finds nothing outstanding, select **Commit the work**: lbbexley-build commits the latest version, pushes it to GitHub and tells you it's done. The buttons are under every reply, whatever the check found, so look at the result first.
 5. **Check what was built** against the plan. For a canvas app screen, read its source in `src/canvas/<AppName>/`:
    - every colour, font and size is a token, such as `BexleyFuchsia` or `BexleySizeBody`
@@ -69,7 +69,7 @@ If you change something in the dev environment yourself, in Power Apps Studio, t
 
 - [ ] What you built is in your dev environment, and matches the plan, including the exact words
 - [ ] lbbexley-check reported nothing outstanding, and lbbexley-build said the work is committed and pushed
-- [ ] The latest version is in `src/` and on GitHub: `src/solution`, and `src/canvas/<AppName>/` for a canvas app
+- [ ] The latest version is in `src/` and on GitHub: `src/solution/<solution>/` (a flow you built appears under its `src/Workflows/`), and `src/canvas/<AppName>/` for a canvas app
 - [ ] Deleting a record or a flow was blocked
 - [ ] `npm run check:all` finds no problems
 

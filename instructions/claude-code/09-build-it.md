@@ -10,7 +10,7 @@ Do this before exercise 08 if you can: it restarts Claude Code, and a plan waiti
 
 Claude Code is running in VS Code's terminal, so run the commands below in a second terminal: **Terminal**, then **New Terminal**.
 
-1. **Create the solution.** In [Power Apps](https://make.powerapps.com), open your dev environment, then **Solutions**, then **New solution**. Use the solution name from `AGENTS.md`, and the Bexley publisher (prefix `lbbexley`).
+1. **Create the solution.** In [Power Apps](https://make.powerapps.com), open your dev environment, then **Solutions**, then **New solution**. Use the solution name from `AGENTS.md`, and the Bexley publisher (prefix `lbbexley`). Then select the solution and choose **Set preferred solution**, so anything you create in Power Apps lands in it.
 2. **Sign in to the Power Platform CLI**, with your environment's address. A browser opens for you to sign in:
 
    ```bash
@@ -65,18 +65,18 @@ Claude Code is running in VS Code's terminal, so run the commands below in a sec
 
    | You're building | What Claude does | Try this |
    |---|---|---|
-   | Dataverse tables | Creates the tables and columns, and a few made-up records, through the Dataverse MCP server | Ask it to delete one of the records. The Bexley guardrails block it: deletes are never allowed through the assistant |
+   | Dataverse tables | Creates the tables and columns, and a few made-up records, through the Dataverse MCP server, then adds each table to the solution | Ask it to delete one of the records. The Bexley guardrails block it: deletes are never allowed through the assistant |
    | A canvas app screen | Brings the app into `src/canvas/<AppName>/`, writes the screen there, and compiles it into the app: it appears in the Power Apps Studio tab | In Studio, play the app. Move through the screen with the Tab key only, and check every control shows a clear focus border |
-   | A flow | Builds it in your dev environment, inside the solution, with Microsoft's Power Automate tools | Claude asks before it runs the flow, because a run can send real emails or messages: test only with made-up data and your own address. Ask it to delete the flow: that's blocked too |
+   | A flow | Builds it in your dev environment with Microsoft's Power Automate tools, then adds it to the solution with `pac solution add-solution-component` | Claude asks before it runs the flow, because a run can send real emails or messages: test only with made-up data and your own address. Ask it to delete the flow: that's blocked too |
    | A model-driven app | Creates the tables and columns, as above | Build the app, its form and its views in the app designer yourself, keeping Microsoft's standard forms and theme. Then ask Claude: *"Bring in the latest version from the dev environment."* |
    | A Power Pages page | Works on the page in `src/pages/`, then uploads it to the dev site with `pac pages upload`: the guardrails check it's the dev environment first | Watch the standards check on each page: the page title, the language, labels, heading order and no tracking scripts |
    | A Copilot Studio agent | Edits the agent's `.mcs.yml` files in `src/agent/`. The standards check rejects emoji, real-looking personal data, placeholder text and card images without alt text | Apply the changes with the Copilot Studio extension, then test the agent in Copilot Studio with every question in `tests/agent-test-set.md`. Ask Claude to update `docs/compliance/atrs-record.md` with the ai-transparency skill |
 
 3. **Watch the end of the run.** Before Claude can finish, the end-of-run check:
-   - has Claude bring in the latest version, with `pac solution sync` into `src/solution`. Claude Code shows this as a **Stop hook error** starting "Before finishing, bring the latest version from the dev environment into the repository"
+   - has Claude bring in the latest version: any new flow or table added to the solution, then `pac solution sync` in `src/solution/<solution>/`. Claude Code shows this as a **Stop hook error** starting "Before finishing, bring the latest version from the dev environment into the repository"
    - runs the standards check on everything that changed, and sends it back to fix anything it finds, in the dev environment
    - asks the end-of-run reviewer, on Haiku, to review the changes
-   - asks Claude to commit the latest version and push it to GitHub
+   - asks Claude to commit the latest version and push it to GitHub, and checks it did: if not, it asks once more, then tells you what's unsaved
 
    When Claude says it's committed and pushed, and Claude Code shows "Bexley end-of-run check passed", the run is finished.
 4. **Check what was built** against the plan. For a canvas app screen, read its source in `src/canvas/<AppName>/`:
@@ -95,7 +95,7 @@ If you change something in the dev environment yourself, in Power Apps Studio, t
 
 - [ ] What you built is in your dev environment, and matches the plan, including the exact words
 - [ ] Claude said the work is committed and pushed, and Claude Code showed "Bexley end-of-run check passed"
-- [ ] The latest version is in `src/` and on GitHub: `src/solution`, and `src/canvas/<AppName>/` for a canvas app
+- [ ] The latest version is in `src/` and on GitHub: `src/solution/<solution>/` (a flow you built appears under its `src/Workflows/`), and `src/canvas/<AppName>/` for a canvas app
 - [ ] Deleting a record or a flow was blocked
 - [ ] `npm run check:all` finds no problems
 

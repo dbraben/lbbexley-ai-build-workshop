@@ -111,7 +111,7 @@ There's nothing to copy or run from this repository: everything you build, and e
 
 - **Attendees** read the instructions here. Your own work happens in your own service repository, made from the template in exercise 02. You don't fork or change this repository.
 - **Facilitators** follow the [facilitator guide](delivery-resources/README.md). It says what to set up beforehand, what to ask attendees to prepare, and which exercises fit a shorter session.
-- **Version.** These instructions match the Bexley AI build harness **v0.6.0**. If the template or the standards are on a newer release, check the changes in the standards repository's CHANGELOG before running the workshop.
+- **Version.** These instructions match the Bexley AI build harness **v0.6.1**. If the template or the standards are on a newer release, check the changes in the standards repository's CHANGELOG before running the workshop.
 
 ## Changing this workshop
 

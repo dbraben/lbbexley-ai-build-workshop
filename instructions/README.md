@@ -43,7 +43,7 @@ Both tracks use the same standards and produce the same documents. The commands 
 - `Text in angle brackets`, like `<your-account>`, is for you to replace with your own.
 - "For example" shows what an answer could look like for an invented project. It's never something you have to build.
 - Prompts in grey boxes are a starting point. Change the wording to fit your project.
-- You don't edit files or run Git yourself, unless a step says so. You ask the assistant, it builds in your dev environment, and once the checks pass it brings the latest version into your repository and commits and pushes it for you.
+- You don't edit files or run Git yourself, unless a step says so. You ask the assistant, it builds in your dev environment, brings the latest version into your repository, and once the checks pass it commits and pushes it for you.
 - Each exercise ends with a **Check** list. Don't move on until everything on it is ticked.
 
 ## Returning to an existing project?

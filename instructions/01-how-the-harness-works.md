@@ -44,7 +44,7 @@ flowchart TD
 
 1. **Plan, on the strongest model.** The assistant writes down what it will do before it does it: the user need, the exact words people will read, and acceptance criteria someone can check. Nothing changes until you approve.
 2. **Build, on the everyday model, in your dev environment.** The assistant builds the real thing with Microsoft's tools: the canvas app open in Power Apps Studio, the flow, the tables, the Power Pages site. It doesn't ask before each change in the dev environment. The standards check runs on everything it writes and sends every problem straight back to it.
-3. **Bring in the latest version.** After a change in the dev environment, the assistant brings the latest version into your repository: the solution with `pac solution sync`, and a canvas app's source through Microsoft's canvas tools. Your repository holds the guidelines and the latest version: nobody edits the service's source there by hand.
+3. **Bring in the latest version.** After a change in the dev environment, the assistant brings the latest version into your repository: the solution with `pac solution sync`, after adding any new flow or table to it, and a canvas app's source through Microsoft's canvas tools. Your repository holds the guidelines and the latest version: nobody edits the service's source there by hand.
 4. **Check, on a smaller model.** Before the assistant can finish, the end-of-run check runs the standards check on everything that changed, and a reviewer looks for what rules can't catch, such as unclear wording or a missing test. It also notes ideas for improving the harness.
 5. **Commit and push.** Once the check is clean, the assistant commits the latest version and pushes it to GitHub for you. In Claude Code the check asks it to; in Copilot you select **Commit the work**. You never need to run Git, make a branch or open a pull request.
 6. **On GitHub.** Every push runs the Bexley standards check again. It doesn't depend on any assistant, so it's the backstop.
@@ -55,7 +55,7 @@ Along the way, guardrails stop the assistant doing things it shouldn't: working 
 
 | | Claude Code | GitHub Copilot |
 |---|---|---|
-| Skills (brand, accessibility, content style, the legal duties, one per platform, and requirements, architect, plan, review, improve) | The **lbbexley** plugin, installed from the standards repository at the same release | Copies in `.github/skills/lbbexley-*` |
+| Skills (brand, accessibility, content style, the legal duties, one per platform, and requirements, architect, plan, review, improve, sync) | The **lbbexley** plugin, installed from the standards repository at the same release | Copies in `.github/skills/lbbexley-*` |
 | Plan, build and check | Plan mode with `opusplan`: Opus plans, Sonnet builds, Haiku reviews | The **lbbexley-plan**, **lbbexley-build** and **lbbexley-check** agents, which hand over to each other |
 | Standards check after each save, and the end-of-run check | Plugin hooks | Copilot hooks (a preview feature) in `.github/hooks/lbbexley.json` |
 | Rules for particular files | `.claude/rules/lbbexley-*` | `.github/instructions/lbbexley-*` |
@@ -97,7 +97,7 @@ Open [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template) o
 1. `AGENTS.md`: the **Never** list. Which commands can't the assistant run?
 2. `.github/workflows/quality.yml`: the line with `uses:`. Which release of the standards does the check on GitHub use? Find the same release in `.claude/settings.json`.
 3. `docs/discovery/.gitignore`: why does it contain a single `*`?
-4. `.claude/settings.json`: the `allow`, `ask` and `deny` lists. Which Git commands can Claude run without asking you, and which does it ask about? Which file types can't it read?
+4. `.claude/settings.json`: the `allow` and `deny` lists. Which `pac` and Git commands can Claude run without asking you, and which pushes are denied? Which file types can't it read?
 5. `.github/skills/`: is there a skill for each platform you might use in your project?
 
 ## Check
