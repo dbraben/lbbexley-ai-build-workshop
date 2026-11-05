@@ -8,17 +8,18 @@ There's no set scenario: each attendee brings a real project. Your job is to hel
 
 ### Two weeks before
 
-- **Publish the harness.** The standards, the template and this workshop must be on GitHub at release `v0.5.0` or later, as the standards repository's `docs/setup.md` describes. The template must be marked as a **Template repository**.
+- **Publish the harness.** The standards, the template and this workshop must be on GitHub at release `v0.6.0` or later, as the standards repository's `docs/setup.md` describes. The template must be marked as a **Template repository**.
 - **Visibility.** Attendees must be able to see all three repositories. If they're private, add the attendees, and give each service repository a `standards-token` secret (see `standards-check.yml`), or the check on GitHub can't read the standards.
 - **Labels.** Check the `harness-improvement` label exists in the standards repository. Decide whether attendees may open real harness-improvement issues in exercise 12, or only read the drafts. Opening them needs the GitHub CLI (`gh`), signed in, on attendees' computers.
 - **AI accounts.** Each attendee needs Claude Pro or Max, or a GitHub Copilot plan with agent mode. Check which models each Copilot plan offers: the plan, build and check agents prefer Opus, Sonnet and Haiku, and fall back down their lists.
 - **Information Governance.** Confirm the pilot's approval covers the workshop, as GOVERNANCE.md in the standards repository describes, including, for attendees who use them, recording discovery meetings and using cleaned transcripts for requirements.
-- **Dev environments**, for attendees who'll build in one in exercise 09 (developer environments work well, one each):
-  - a dev environment with Dataverse, holding fictional data only
+- **Dev environments, one for each attendee.** Everyone builds in one from exercise 08 on: there's no route without one. Developer environments work well. Each needs:
+  - Dataverse, holding fictional data only
   - the Bexley publisher (prefix `lbbexley`) imported
   - the Dataverse MCP server turned on for the environment, as the onboarding guide's "What the Digital Team sets up first" describes
   - a Copilot Studio licence or trial, for anyone building an agent
   - a test account for the accessibility tests' sign-in, with access to dev only
+  - coauthoring allowed for canvas apps, and data policies that let Microsoft's canvas and Power Automate tools work. Check that the council's sign-in policies let attendees sign in to the Azure CLI (`az login`), which Microsoft's Power Automate tools use
 
 ### One week before: the pre-work
 
@@ -32,7 +33,7 @@ Anyone who records a meeting can't clean the transcript until they've created th
 
 ### The day before
 
-- Run exercises 00 to 06 yourself on both tracks, on the release you'll use, with a project of your own. In exercise 05, try both ways of answering: in the chat, and pasting the table back in a new session. Assistants, VS Code, Teams and the harness all change.
+- Run exercises 00 to 06 yourself on both tracks, on the release you'll use, with a project of your own. In exercise 05, try both ways of answering: in the chat, and pasting the table back in a new session. Then build one canvas app screen and one flow in a dev environment, as exercise 09 does, to check Microsoft's canvas and Power Automate tools work on the council's tenant, and that the latest version reaches GitHub. Assistants, VS Code, Teams and the harness all change.
 - Check attendees' machines have the tools in exercise 00 installed, including Claude Code's command-line version for the Claude Code track: `claude --version` works in VS Code's terminal. The template's `.mcp.json` starts the Dataverse server through Windows' `cmd`, so Claude Code attendees on a Mac or Linux who build with Dataverse add their own server instead, as exercise 09 shows. Try that on a Mac before the session if anyone will use one.
 - Have a few prompts ready to help anyone who arrives without a project choose one in five minutes, such as "What's the most annoying manual process in your team?" and "What do people email your team about most?"
 
@@ -44,11 +45,11 @@ Anyone who records a meeting can't clean the transcript until they've created th
 |---|---|---|
 | 0:00 | Introduction and 01 | Why the harness exists, and the flow from a conversation to working software |
 | 0:20 | 02 and 03 | Check 00 was done: don't install in the session |
-| 0:40 | 04 | The first end-of-run check, and the commit after it: pause and point them out |
+| 0:40 | 04 | The first end-of-run check, and the commit and push after it: pause and point them out |
 | 0:55 | 05 | Most attendees answer in the chat. Ask anyone with a transcript to clean it before the session |
 | 1:15 | 06 | Walk the room: are the needs needs, not solutions? |
-| 1:35 | 08 and 09 | Skip 07 in this session: the plan works without an architecture. Exercise 08 tells attendees to say so when they ask for the plan, or Copilot's lbbexley-plan offers to design the service first. Most attendees take route A, files only |
-| 2:15 | 13 | Exercises 07, 10, 11 and 12 as follow-up work. Remind everyone to ask the assistant to push their work to GitHub |
+| 1:35 | 08 and 09 | Skip 07 in this session: the plan works without an architecture. Exercise 08 tells attendees to say so when they ask for the plan, or Copilot's lbbexley-plan offers to design the service first. Check everyone did "Set up your dev environment once" before the session: it's the slowest part |
+| 2:15 | 13 | Exercises 07, 10, 11 and 12 as follow-up work. Their work is on GitHub already: the assistant pushed it |
 
 ### Half a day: everything
 
@@ -70,13 +71,13 @@ Anyone who records a meeting can't clean the transcript until they've created th
 |---|---|
 | 01 | Every reference points from the service to the standards. A new release never changes a service's checks until the service updates |
 | 03 | The guardrails only run in Bexley repositories. In Copilot there's no prompt guard and no way to stop it reading a file, so keeping originals out of the repository matters even more |
-| 04 | Plan mode stops anything changing until it's approved. The end-of-run check ran on a smaller model before the assistant could finish, then the assistant committed the set-up: nobody ran Git |
+| 04 | Plan mode stops anything changing until it's approved. The end-of-run check ran on a smaller model before the assistant could finish, then the assistant committed the set-up and pushed it to GitHub: nobody ran Git |
 | 05 | The skill asks only what it doesn't already know, a few questions at a time, and turns "don't know" into an open question instead of inventing an answer. The table's first line, "Bexley requirements answers", is how it knows where it was when the answers come back |
 | The transcript page | The cleaner keeps names outside the repository and never prints them, but only a person can spot a resident's name or circumstances in what someone said. The read-through is the most important step |
 | 06 | Needs, not solutions. Everything is checked in the chat: nobody opens or edits the file |
 | 07 | Every component has to earn its place, and the duties are designed in, not added at the end |
 | 08 | The plan has the real words users will read, and acceptance criteria someone can check, taken from the story |
-| 09 | The Dataverse guard: explore freely, ask before touching records, never delete |
+| 09 | The assistant builds the real thing in the dev environment without asking each time, but the guardrails keep it there, block deletes and ask before a flow runs. The latest version comes into the repository before the check, so what's reviewed and pushed is what's in the dev environment |
 | 10 | The check catches the deliberate mistake straight away, and refuses a suppression without a reason. Testing by people still matters |
 | 11 | The review is the definition of done for a story. The check on GitHub doesn't care which assistant, if any, wrote the code |
 | 12 | The harness improves itself, but people decide what changes |
@@ -97,20 +98,26 @@ Anyone who records a meeting can't clean the transcript until they've created th
 | The attendee lost the questions table | It's in `docs/discovery/requirements-questions.md`. Or ask the assistant again: *"Give me the requirements questions as a table."* The open questions are in the draft requirements, so it gives the same ones |
 | The pasted answers aren't recognised | The first line is missing, or only part of the table was pasted. Paste it again, from the line starting "Bexley requirements answers" to the last row, or say *"Here are the answers to the requirements questions"* before pasting |
 | The requirements skill stops for personal data | It's doing its job. The attendee says it again without the person, or, for a transcript, fixes the place it describes and runs it again |
-| Claude Code didn't offer to install the plugin | Exit Claude Code and, in the same terminal, run `claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.5.0 --scope local` and `claude plugin install lbbexley@lbbexley-digital --scope local`, with the release in the repository's `quality.yml`. Then start Claude Code again |
+| Claude Code didn't offer to install the plugin | Exit Claude Code and, in the same terminal, run `claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.6.0 --scope local` and `claude plugin install lbbexley@lbbexley-digital --scope local`, with the release in the repository's `quality.yml`. Then start Claude Code again |
 | There's no **Use this template** button | The attendee isn't signed in to GitHub. Or give them the link in exercise 02, which opens the same page |
 | Someone typed a terminal command, such as the transcript cleaner, into Claude Code | Claude Code runs in VS Code's terminal, so commands go in a second one (**Terminal**, then **New Terminal**). Claude isn't allowed to run the cleaner, so nothing ran: run it again in a second terminal. The command, including the file's name, went to Claude as a message: if the name includes a person's name, tell the facilitator |
 | `claude` isn't found in VS Code's terminal | Only the VS Code extension is installed, and it doesn't add `claude` to the terminal. Install the command-line version (exercise 00), then open a new terminal |
 | `/model` doesn't show `opusplan` | Claude Code calls it **Opus Plan Mode**. It's the last option, and it's only listed while it's the model in use. If it isn't there, type `/model opusplan` |
 | Claude Code shows a **Stop hook error** at the end of a run | It's the end-of-run check: first asking for its review, then, once everything passes, asking Claude to commit the work ("Bexley end-of-run check passed. Now save the work"). Both are the check working. Claude carries on by itself |
 | Claude says the commit failed because Git doesn't know who they are | Set the attendee's name and email (exercise 00), then ask Claude to commit again |
+| The push to GitHub fails | Usually the attendee isn't signed in to GitHub in Git, or `main` is protected on GitHub. Sign in (the GitHub CLI's `gh auth login` sets Git up too), then ask the assistant to push again. A protected `main` means the team wants pull requests: work on a branch |
+| The end-of-run check keeps saying "Before finishing, bring the latest version from the dev environment into the repository" | `pac solution sync` isn't working: usually `pac` isn't signed in, or there's no `src/solution` yet. Do steps 2 and 3 of "Set up your dev environment once" in exercise 09. After three tries, the check stops and tells the attendee instead |
+| The guardrails say `pac` is connected to another environment | The attendee's `pac` profile points somewhere else. `pac org select --environment <the dev address in AGENTS.md>`, or `pac auth create` for it, then try again. That's the guard doing its job |
+| `/configure-canvas-mcp` fails, or `dnx` isn't found | The .NET 10 SDK is missing (`dotnet --list-sdks`), coauthoring isn't on, or the address was the player's, not Studio's editing page. Keep the Studio tab open: closing it ends the connection |
+| The Power Automate tools can't sign in | Run `az login` with the same account as `pac`. If the council's sign-in policies block it, build the flow in the designer and ask the assistant to sync it in |
+| VS Code asks before every tool and command (Copilot) | Choose to always allow the canvas, Power Automate and Dataverse tools, `pac solution sync`, `git commit` and `git push` in the workspace. Never allow deletes |
 | Claude doesn't commit the work at the end of a run | The check only asks for the commit once everything passes. It stops without one when a reviewer's problem was explained rather than fixed (the attendee decides, then says *"That's fine: commit the work"*), when a standards problem is still there after three attempts, after five reviews in one request, and in plan mode. If none of those, the plugin is older than 0.4.0: update it as in the row after next |
 | The end-of-run check asks for the same review again and again, then says the review didn't run | The attendee's Claude Code plugin is older than 0.3.1: update it as in the next row |
-| The plugin isn't on the repository's release | `claude plugin list`, in a second terminal in the service repository, shows the plugin's version: it should match the release in `.github/workflows/quality.yml`. If not, run `claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.5.0 --scope local` (with that release), then `claude plugin update lbbexley@lbbexley-digital`, and start Claude Code again |
+| The plugin isn't on the repository's release | `claude plugin list`, in a second terminal in the service repository, shows the plugin's version: it should match the release in `.github/workflows/quality.yml`. If not, run `claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.6.0 --scope local` (with that release), then `claude plugin update lbbexley@lbbexley-digital`, and start Claude Code again |
 | Claude Code doesn't start in plan mode | The attendee is using the Claude Code panel, which never takes its starting mode from the project. Run `claude` in VS Code's terminal instead, or set `claudeCode.initialPermissionMode` to `plan` in VS Code user settings |
 | Copilot doesn't list the lbbexley agents | Check the workspace is trusted, Agent mode is on, and VS Code is up to date |
 | The Copilot hooks don't run | They're a preview feature: check `chat.useHooks` is on and VS Code is up to date. Meanwhile, run `npm run check` and hand over to lbbexley-check by hand |
-| Copilot's **Commit the work** button | It's under every reply from lbbexley-check, whatever the check found, so attendees read the result before they select it. If it isn't there at all, the repository's agents are older than 0.4.0: ask lbbexley-build to update the Bexley standards to v0.5.0 |
+| Copilot's **Commit the work** button | It's under every reply from lbbexley-check, whatever the check found, so attendees read the result before they select it. If it isn't there at all, the repository's agents are older than 0.4.0: ask lbbexley-build to update the Bexley standards to v0.6.0 |
 | A model on an agent's list isn't available | Copilot uses the next one on the list. Tell attendees which model they're getting |
 | The check on GitHub fails with "Bexley files out of date" | Someone edited a synced file. Ask the assistant to undo the change to that file, or to update the Bexley standards to the version in `.github/workflows/quality.yml` |
 | The check on GitHub can't find the standards | The standards repository is private and the service repository has no `standards-token` secret |

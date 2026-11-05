@@ -27,7 +27,7 @@
 - **The service team's answers.** When the table comes back, paste it into the chat, first line included, in any session: the requirements skill updates `docs/requirements.md` and shows you what changed.
 - **The next story.** Ask the assistant which Must stories are left, and plan the next one in a fresh session, as in exercise 08.
 - **New information.** After another conversation with the service team, run the requirements skill again and tell it what's new. If you recorded the conversation, clean the transcript first, as in [Use a Teams meeting transcript](use-a-teams-transcript.md).
-- **Back it up.** Your commits stay on your computer until they're pushed. Ask the assistant to push your work to GitHub at the end of each day: it asks before it pushes, and the same checks run again there.
+- **Changes you make yourself.** If you change something in the dev environment yourself, in Power Apps Studio or the flow designer, ask the assistant to sync it (`/lbbexley:sync` in Claude Code, the lbbexley-sync skill in Copilot), so your repository keeps the latest version. The assistant commits and pushes it after the check, as usual.
 - **The compliance documents** in `docs/compliance/` need real decisions from the service team before go-live: `npm run check:release` tells you what's left.
 - **Sign-offs.** Agree with Information Governance and Communications the ones your service needs. The review tells you which.
 - **New releases of the standards.** Exercise 12 says what to do when the Digital Team announces one.

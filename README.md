@@ -2,7 +2,7 @@
 
 # Build your own service with AI: the Bexley AI build harness workshop
 
-A hands-on workshop for London Borough of Bexley developers. You bring a real project. An AI coding assistant asks you about it in the chat, writes its requirements and designs it, then plans, builds and checks its first piece with you, to the council's brand, accessibility and legal standards. The assistant writes the files and commits the work for you, so you hardly touch the repository yourself. Everything happens in your own service repository, made from the Bexley app template.
+A hands-on workshop for London Borough of Bexley developers. You bring a real project. An AI coding assistant asks you about it in the chat, writes its requirements and designs it, then plans, builds and checks its first piece with you, to the council's brand, accessibility and legal standards. The assistant builds in your dev environment, brings the latest version into your own service repository, and commits and pushes it for you, so you hardly touch the repository yourself. Your repository, made from the Bexley app template, keeps the guidelines and the latest version of your service.
 
 There are two tracks with the same exercises: one for **Claude Code** and one for **GitHub Copilot** in VS Code.
 
@@ -14,7 +14,7 @@ There are two tracks with the same exercises: one for **Claude Code** and one fo
 
 ## Session description
 
-AI coding assistants can build canvas apps, Copilot Studio agents and flows quickly, but quick isn't the same as accessible, lawful and on brand, and it's no use if it isn't what the service needs. The Bexley AI build harness starts from what the people who run the service actually said. It makes the assistant follow the council's standards and check its own work. It plans on the strongest model, builds on the everyday model, and checks on a smaller one before it can finish. Then it commits the work for you, on your computer, and the same checks run again on GitHub when you push it there.
+AI coding assistants can build canvas apps, Copilot Studio agents and flows quickly, but quick isn't the same as accessible, lawful and on brand, and it's no use if it isn't what the service needs. The Bexley AI build harness starts from what the people who run the service actually said. It makes the assistant follow the council's standards and check its own work. It plans on the strongest model, builds on the everyday model directly in your dev environment, and checks on a smaller one before it can finish. Then it brings the latest version into your repository and commits and pushes it for you, and the same checks run again on GitHub.
 
 In this workshop you use the harness the way you will on every project: from a conversation about the service, through requirements, a design and a plan, to a first piece of working software, reviewed to zero findings and committed in your repository.
 
@@ -26,14 +26,14 @@ flowchart LR
     req --> design["Design"]
     req -- "one story at a time" --> plan["Plan<br/>strongest model"]
     design -.-> plan
-    plan --> build["Build<br/>checked on every save"]
-    build --> check["End-of-run check<br/>smaller model"]
-    check --> save["Committed for you<br/>and checked again on GitHub when pushed"]
+    plan --> build["Build in the dev environment<br/>checked on every change"]
+    build --> check["Latest version synced,<br/>end-of-run check on a smaller model"]
+    check --> save["Committed and pushed for you<br/>and checked again on GitHub"]
 ```
 
 - **Three repositories, and yours.** The [standards](https://github.com/dbraben/lbbexley-digital-standards) hold the rules, skills and checks. The [app template](https://github.com/dbraben/lbbexley-app-template) is a stamp for new service repositories. This workshop holds the instructions. Your own service repository is where all your work happens, and it follows the standards at a pinned release.
 - **Your words in, no personal data.** The assistant asks its questions in the chat, a few at a time, or gives them to you as a table for the service team. People are described by role, never by name. A Teams meeting transcript can help too: it's cleaned on your computer first, with roles instead of names and contact details removed, and the original never goes in a repository or near an assistant.
-- **Plan, build, check, commit.** Every change is planned before it's built, checked after every save, and checked again before the assistant can finish. Then the assistant commits it for you, on your computer: no Git commands, branches or pull requests. Zero findings of any severity is done.
+- **Plan, build in the dev environment, check, save.** Every change is planned before it's built. The assistant builds it in your dev environment with Microsoft's tools, brings the latest version into your repository, and has it checked before it can finish. Then it commits it and pushes it to GitHub for you: no Git commands, branches or pull requests. Zero findings of any severity is done.
 
 [Exercise 01](instructions/01-how-the-harness-works.md) explains it all in more detail.
 
@@ -51,9 +51,9 @@ You need:
 - a GitHub account, and access to [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template) and [lbbexley-digital-standards](https://github.com/dbraben/lbbexley-digital-standards)
 - Claude Code's command-line version with a Claude Pro or Max subscription, or GitHub Copilot with agent mode in VS Code
 - VS Code, Git and Node.js 22 or later
-- for building in a dev environment: a Power Platform dev environment with Dataverse and the Bexley publisher, from the Digital Team
+- a Power Platform dev environment with Dataverse and the Bexley publisher, from the Digital Team: everything is built there, from exercise 08 on
 
-Then start with [00 Before you start](instructions/00-before-you-start.md). Without a dev environment you can do everything except some of the build routes in exercise 09.
+Then start with [00 Before you start](instructions/00-before-you-start.md).
 
 ## Learning outcomes
 
@@ -71,11 +71,11 @@ By the end, you can:
 
 | Part | Where | Exercises |
 |---|---|---|
-| Your service repository, set up for your project | On your computer, and in your GitHub account once you push it | 02 to 04 |
+| Your service repository, set up for your project | In your GitHub account, kept up to date by the assistant | 02 to 04 |
 | Requirements with user stories, checked with you in the chat, and a summary for the service owner | `docs/requirements.md` | 05 and 06 |
 | The design of the service | `docs/architecture.md` | 07 |
-| A plan and the first piece of one story, built and tested | `docs/plans/`, `src/` and `tests/` | 08 to 10 |
-| Work reviewed to zero findings, committed one piece at a time, and an idea for the harness | Your repository, and the standards repository's issues | 11 and 12 |
+| A plan and the first piece of one story, built in your dev environment and tested | `docs/plans/`, your dev environment with its latest version in `src/`, and `tests/` | 08 to 10 |
+| Work reviewed to zero findings, committed and pushed one piece at a time, and an idea for the harness | Your repository, and the standards repository's issues | 11 and 12 |
 
 ## Exercises
 
@@ -111,7 +111,7 @@ There's nothing to copy or run from this repository: everything you build, and e
 
 - **Attendees** read the instructions here. Your own work happens in your own service repository, made from the template in exercise 02. You don't fork or change this repository.
 - **Facilitators** follow the [facilitator guide](delivery-resources/README.md). It says what to set up beforehand, what to ask attendees to prepare, and which exercises fit a shorter session.
-- **Version.** These instructions match the Bexley AI build harness **v0.5.0**. If the template or the standards are on a newer release, check the changes in the standards repository's CHANGELOG before running the workshop.
+- **Version.** These instructions match the Bexley AI build harness **v0.6.0**. If the template or the standards are on a newer release, check the changes in the standards repository's CHANGELOG before running the workshop.
 
 ## Changing this workshop
 

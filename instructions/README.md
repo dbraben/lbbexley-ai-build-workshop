@@ -27,23 +27,23 @@ Both tracks use the same standards and produce the same documents. The commands 
 | 05 | [Answer the requirements questions](05-answer-the-requirements-questions.md): in the chat, or later from a table | No | 20 min |
 | 06 | Check the requirements: [Claude Code](claude-code/06-check-the-requirements.md) · [Copilot](github-copilot/06-check-the-requirements.md) | No | 20 min |
 | 07 | Design the service: [Claude Code](claude-code/07-design-the-service.md) · [Copilot](github-copilot/07-design-the-service.md) | No | 15 min |
-| 08 | Plan the first story: [Claude Code](claude-code/08-plan-the-first-story.md) · [Copilot](github-copilot/08-plan-the-first-story.md) | No | 10 min |
-| 09 | Build it: [Claude Code](claude-code/09-build-it.md) · [Copilot](github-copilot/09-build-it.md) | Depends on what you build | 30 min |
-| 10 | Check and test: [Claude Code](claude-code/10-check-and-test.md) · [Copilot](github-copilot/10-check-and-test.md) | For the automated tests | 15 min |
+| 08 | Plan the first story: [Claude Code](claude-code/08-plan-the-first-story.md) · [Copilot](github-copilot/08-plan-the-first-story.md) | Yes | 10 min |
+| 09 | Build it: [Claude Code](claude-code/09-build-it.md) · [Copilot](github-copilot/09-build-it.md) | Yes | 30 min |
+| 10 | Check and test: [Claude Code](claude-code/10-check-and-test.md) · [Copilot](github-copilot/10-check-and-test.md) | Yes | 15 min |
 | 11 | Review your work: [Claude Code](claude-code/11-review-your-work.md) · [Copilot](github-copilot/11-review-your-work.md) | No | 10 min |
 | 12 | Improve the harness: [Claude Code](claude-code/12-improve-the-harness.md) · [Copilot](github-copilot/12-improve-the-harness.md) | No | 10 min |
 | 13 | [Wrap-up and next steps](13-wrap-up.md) | No | 5 min |
 
 **Recorded a Teams meeting with the service team?** [Use a Teams meeting transcript](use-a-teams-transcript.md) shows how to clean it before exercise 05. It's optional.
 
-**No dev environment yet?** You can do everything except some of the build routes in exercise 09 on files alone. Exercise 09 has a files-only route for a canvas app screen.
+**No dev environment yet?** You can do exercises 00 to 07: the requirements and the design. Everything from exercise 08 on is built in a dev environment, so ask the facilitator for one before then.
 
 ## How to read these instructions
 
 - `Text in angle brackets`, like `<your-account>`, is for you to replace with your own.
 - "For example" shows what an answer could look like for an invented project. It's never something you have to build.
 - Prompts in grey boxes are a starting point. Change the wording to fit your project.
-- You don't edit files or run Git yourself, unless a step says so. You ask the assistant, it does the work, and it commits the work for you once the checks pass.
+- You don't edit files or run Git yourself, unless a step says so. You ask the assistant, it builds in your dev environment, and once the checks pass it brings the latest version into your repository and commits and pushes it for you.
 - Each exercise ends with a **Check** list. Don't move on until everything on it is ticked.
 
 ## Returning to an existing project?

@@ -1,6 +1,6 @@
 # 10 Check and test (GitHub Copilot)
 
-*About 15 minutes · Files only for the checks · Dev environment for the automated accessibility tests*
+*About 15 minutes · Dev environment needed*
 
 You've seen the checks pass. Now see them catch something, on your own work, then test what you built: automatically where there's something to open, and by hand.
 
@@ -14,17 +14,15 @@ You've seen the checks pass. Now see them catch something, on your own work, the
    | A canvas app screen | *"Change the heading's colour to #FF0000."* |
    | A Power Pages page | *"Remove the page title."* |
    | An agent | *"Add a smiley emoji to the greeting."* |
-   | A flow | *"Delete the Catch scope."* (in the flow's source) |
+   | A flow | *"Remove the Catch scope from the flow."* |
 
-3. Watch what happens after the edit. With hooks on, the standards check finds the problem and sends it back, and the agent puts it right. Hooks off? Run `npm run check` yourself and read what it reports.
-4. Now ask it to hide the finding instead: *"Add a suppression comment for that finding instead of fixing it."* The check reports a new problem straight away: a suppression needs a written reason. The agent then either removes the suppression or writes a reason. Either way, finish the experiment: *"Put the file back as it was before this experiment."*
+3. Watch what happens. With hooks on, the standards check finds the problem and sends it back, and the agent puts it right in the dev environment. For a canvas app, page or agent that's straight after the edit; for a flow, it's when the flow is synced into the repository. Hooks off? Run `npm run check` yourself and read what it reports.
+4. Now ask it to hide the finding instead: *"Add a suppression comment for that finding instead of fixing it."* The check reports a new problem straight away: a suppression needs a written reason. The agent then either removes the suppression or writes a reason. Either way, finish the experiment: *"Put it back as it was before this experiment."*
 5. Run `npm run check:all` in VS Code's terminal. It finds no problems.
 
 ## 2. Run the accessibility tests
 
 You need something to open: a page or screen in your dev environment.
-
-**Files only?** There's nothing to open yet, so skip to [4. Commit it](#4-commit-it). Ask lbbexley-build first: *"Note in the test log that the automated and manual accessibility tests are still to do, once the app is in a dev environment."* Come back to sections 2 and 3 once your app exists.
 
 1. Get the address:
    - **Canvas app:** in Power Apps, open your app's **Details** and copy its **Web link**. It looks like `https://apps.powerapps.com/play/e/<environment-id>/a/<app-id>?tenantId=<tenant-id>`. Add `&hidenavbar=true` to the end.
@@ -69,16 +67,16 @@ Record my manual tests in the test log: keyboard only passed; with Narrator, the
 has no name; 400% zoom passed. Then fix the search box.
 ```
 
-## 4. Commit it
+## 4. Commit and push it
 
-Select **Check my work**, then, when lbbexley-check finds nothing outstanding, **Commit the work**. lbbexley-build commits the test log, the test targets and anything else it changed, and tells you it's committed.
+Select **Check my work**, then, when lbbexley-check finds nothing outstanding, **Commit the work**. lbbexley-build commits the test log, the test targets and anything else that changed, pushes them to GitHub, and tells you it's done.
 
 ## Check
 
 - [ ] The standards check caught the deliberate mistake, and the suppression without a reason
 - [ ] `npm run check:all` finds no problems
-- [ ] With a dev environment: your page or screen is in `targets.json` and passes with zero violations
-- [ ] The test log has your manual tests, or, for files only, a note that the tests are still to do, and it's committed
+- [ ] Your page or screen is in `targets.json` and passes with zero violations
+- [ ] The test log has your manual tests, and it's committed and pushed
 
 ## What just happened
 
@@ -86,7 +84,7 @@ There are three layers of checking, and each catches what the one before can't:
 
 1. **The standards check** after every edit: mechanical rules, many of them mapped to WCAG 2.2, run in milliseconds.
 2. **The check agent** on a smaller model: judgement about wording, naming and design, on just the files changed.
-3. **The check on GitHub**, whenever your work is pushed there: the backstop. It runs whatever tool wrote the code, or if no assistant was used at all.
+3. **The check on GitHub**, on every push: the backstop. It runs whatever tool made the change, or if no assistant was used at all.
 
 And then people: the tests you just did by hand, which no tool replaces.
 

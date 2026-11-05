@@ -7,7 +7,7 @@ GitHub Copilot gets the Bexley standards from files already in your repository: 
 | Where | What Copilot gets |
 |---|---|
 | `AGENTS.md` and `.github/copilot-instructions.md` | Your service's details and the rules that always apply |
-| `.github/skills/lbbexley-*` | The Bexley skills: brand, accessibility, content style, the legal duties, one per platform, and the requirements, architect, plan, quality-checks, review and improve skills |
+| `.github/skills/lbbexley-*` | The Bexley skills: brand, accessibility, content style, the legal duties, one per platform, and the requirements, architect, plan, quality-checks, review, improve and sync skills |
 | `.github/agents/lbbexley-*` | The plan, build and check agents, which hand over to each other with buttons such as **Build this plan**, **Check my work** and **Commit the work**, and read-only reviewers |
 | `.github/instructions/lbbexley-*` | Rules that apply automatically to the files they cover, such as canvas app source |
 | `.github/hooks/lbbexley.json` | Hooks (a preview feature) that run the standards check after each edit and before the agent finishes |

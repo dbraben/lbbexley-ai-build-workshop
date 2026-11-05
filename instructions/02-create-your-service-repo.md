@@ -38,7 +38,7 @@ Every Bexley service has its own repository, made from the app template. You mak
    | # | Where | What it does |
    |---|---|---|
    | 1 | `.claude/settings.json`: `extraKnownMarketplaces` and `enabledPlugins` | Claude Code installs the Bexley plugin from the standards repository, at the release in `ref` |
-   | 2 | `.github/workflows/quality.yml`: the `uses:` line and `standards-ref` | Whenever your work is pushed to GitHub, it's checked by the standards repository's workflow, pinned to the same release, such as `v0.5.0` |
+   | 2 | `.github/workflows/quality.yml`: the `uses:` line and `standards-ref` | Whenever your work is pushed to GitHub, it's checked by the standards repository's workflow, pinned to the same release, such as `v0.6.0` |
    | 3 | `.github/skills/lbbexley-*`, `.github/agents/lbbexley-*`, `.github/instructions/lbbexley-*`, `.claude/rules/lbbexley-*`, `.github/hooks/lbbexley.json` and `.lbbexley/standards/` | Copies of the standards at the same release, for GitHub Copilot, for `npm run check`, for the transcript cleaner and for the accessibility tests. Never edit these by hand |
    | 4 | `package.json`: the `standards:update` script | Fetches a new release of the standards and moves the pins in `quality.yml` and `.claude/settings.json` |
 
@@ -52,7 +52,7 @@ Every Bexley service has its own repository, made from the app template. You mak
 
 - Your repository started as an exact copy of the template, including the synced Bexley files at the template's release.
 - It follows that release of the standards until you choose to update it. A new rule never changes your checks without warning.
-- Cloning is the last Git command you need. From exercise 04 on, the assistant commits your work for you.
+- Cloning is the last Git command you need. From exercise 04 on, the assistant commits your work and pushes it to GitHub for you.
 
 ---
 

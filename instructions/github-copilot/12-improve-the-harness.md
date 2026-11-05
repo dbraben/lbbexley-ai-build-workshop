@@ -28,7 +28,7 @@ Each end-of-run check also asks whether the harness itself let you down: a mista
 
 ## When there's a new release
 
-You don't need to do this today. When the Digital Team announces a new release of the standards, such as `v0.6.0`, ask lbbexley-build: *"Update the Bexley standards to v0.6.0."* It runs `npm run standards:update -- v0.6.0`, which updates the synced Bexley files, including the ones Copilot reads, the release the check on GitHub uses, and the release colleagues using Claude Code install the plugin from. Allow the command. Then select **Check my work** and **Commit the work**, with no other work in the same change.
+You don't need to do this today. When the Digital Team announces a new release of the standards, such as `v0.7.0`, ask lbbexley-build: *"Update the Bexley standards to v0.7.0."* It runs `npm run standards:update -- v0.7.0`, which updates the synced Bexley files, including the ones Copilot reads, the release the check on GitHub uses, and the release colleagues using Claude Code install the plugin from. Allow the command. Then select **Check my work** and **Commit the work**, with no other work in the same change.
 
 ## Check
 

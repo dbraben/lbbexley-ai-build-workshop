@@ -70,10 +70,11 @@ Then, for your track:
   Open a new terminal and run `claude --version` to check it, then run `claude` and sign in with your Claude Pro or Max account. The Claude Code extension for VS Code is optional: it doesn't add `claude` to the terminal.
 - **GitHub Copilot track:** install GitHub Copilot Chat in VS Code, sign in with your GitHub account, and check that the chat view offers **Agent** mode.
 
-If you'll build in a dev environment in exercise 09, also install:
+Everything is built in a dev environment, so also install:
 
 - the **Power Platform Tools** extension for VS Code, which includes the Power Platform CLI (`pac`)
 - the **.NET 10 SDK** for a canvas app, which Microsoft's canvas app authoring tools need (`dotnet --list-sdks`)
+- the **Azure CLI** for flows, which Microsoft's Power Automate tools sign in with (`az --version`)
 - the **Copilot Studio** extension for VS Code for an agent
 
 > [!TIP]
@@ -93,7 +94,7 @@ You need to be able to see these repositories on GitHub. Ask the facilitator if 
 - [lbbexley-app-template](https://github.com/dbraben/lbbexley-app-template): the starting point for every service
 - [lbbexley-digital-standards](https://github.com/dbraben/lbbexley-digital-standards): the standards your service follows
 
-To build in a dev environment in exercise 09, you also need:
+From exercise 08 on, you build in a dev environment, so you also need:
 
 - a Power Platform dev environment with Dataverse, with fictional data only, and its address (like `https://<your-org>-dev.crm11.dynamics.com`)
 - the Bexley publisher (prefix `lbbexley`) imported into it
@@ -106,6 +107,7 @@ To build in a dev environment in exercise 09, you also need:
 - [ ] `git --version` and `node --version` work, Node.js is 22 or later, and `git config --global user.name` shows your name
 - [ ] Your assistant is installed and signed in (for Claude Code, `claude --version` works in a new terminal), and your AI account's privacy settings are set
 - [ ] You can open both repositories on GitHub
+- [ ] You have a dev environment, or the facilitator is setting one up for you
 
 ---
 

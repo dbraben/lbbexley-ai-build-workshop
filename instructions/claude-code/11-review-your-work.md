@@ -20,23 +20,23 @@
 
    If you haven't built anything people use yet, it checks your documents only, and says the accessibility tests and the accessibility review don't apply. A screen or page you've built that the accessibility tests can't open is reported as a gap, not a pass.
 3. **Check the compliance documents** it mentions. If your story collects or shows information about people, the DPIA screening in `docs/compliance/dpia-screening.md` needs it. Ask Claude to draft the parts the review lists; the decisions stay as `{{...}}` for the service team.
-4. **Fix what it found.** Ask Claude to fix every item under **Must fix**, then run the review again, until there's nothing under it. Claude commits the fixes when the end-of-run check passes.
-5. **Optional: put your work on GitHub.** Your commits are on your computer, not yet on GitHub. To back them up, or to show them to someone, ask Claude: *"Push my work to GitHub."* Claude asks before it pushes. On GitHub, the **Quality** workflow runs the Bexley standards check again: your repository's **Actions** tab shows it pass.
+4. **Fix what it found.** Ask Claude to fix every item under **Must fix**, in the dev environment, then run the review again, until there's nothing under it. Claude commits and pushes the fixes when the end-of-run check passes.
+5. **See it on GitHub.** Every commit is pushed, so your work is already on GitHub. Open your repository's **Actions** tab: the **Quality** workflow ran the Bexley standards check again on each push, and passed.
 
 ## Check
 
 - [ ] The review reports nothing under "Must fix"
 - [ ] The tests that need a person are recorded in the test log
-- [ ] Claude said the fixes are committed
+- [ ] Claude said the fixes are committed and pushed, and the **Quality** workflow passed on GitHub
 
 ## What just happened
 
 - The review used two reviewer agents on Sonnet, and the end-of-run checks used Haiku: each check runs on the smallest model that does it well.
 - The check on GitHub doesn't depend on any assistant. Code written with Copilot, Claude Code or no assistant at all meets the same bar.
-- Your requirements, design, plan and build are committed in your repository, one commit for each piece of work, so anyone can see what was asked for, what was planned and what was built.
+- Your requirements, design, plan and the latest version of what you built are committed in your repository and on GitHub, one commit for each piece of work, so anyone can see what was asked for, what was planned and what was built.
 
 > [!NOTE]
-> A team working on a real service may put each story on a branch of its own and open a pull request, so a colleague reviews it before it joins `main`. Ask the Digital Team if your team wants to work that way. You don't need it for this workshop.
+> A team working on a real service may want a colleague to review each story before it joins `main`. With `main` protected on GitHub, the assistant's push to it fails, and it tells you: then each story goes on a branch of its own with a pull request. Ask the Digital Team if your team wants to work that way. You don't need it for this workshop.
 
 ---
 

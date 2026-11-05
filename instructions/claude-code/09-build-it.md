@@ -1,33 +1,12 @@
 # 09 Build it (Claude Code)
 
-*About 30 minutes · Files only, or with a dev environment*
+*About 30 minutes · Dev environment needed*
 
-Now Claude builds what you planned, on Sonnet. Watch the checks as it works: the standards check runs every time Claude saves a file, and the end-of-run check runs before it can finish.
+Now Claude builds what you planned, on Sonnet, directly in your dev environment with Microsoft's tools. Your repository keeps the latest version: after each change in the dev environment, Claude brings it into the repository, the end-of-run check reviews it, and Claude commits it and pushes it to GitHub. You don't approve each change in the dev environment, and you don't run Git.
 
-Follow the route for what your plan builds. Each route starts the same way:
+## Set up your dev environment once
 
-- Approve the plan with **Yes, manually approve edits**, so you see each change.
-- After each save, read what the standards check says: "Bexley standards check passed for ..." means the file is clean. A list of problems means Claude must fix them straight away, however minor, and it does.
-- At the end, the end-of-run check runs, then asks Claude to commit what it built. When Claude says it's committed and Claude Code shows "Bexley end-of-run check passed", the run is finished.
-
-## Route A: a canvas app screen, files only
-
-1. Approve the plan. Claude builds the screen as source, for example `src/canvas/<AppName>/<ScreenName>.pa.yaml`, from the Bexley screen pattern and with the Bexley design tokens, and puts the made-up sample data in a named formula.
-2. Approve each edit as it comes, and watch the standards check after each save.
-3. Claude may say it can't add the screen to `tests/accessibility/targets.json` yet, because there's no app to open. That's right: you'll add it once the app exists in a dev environment. If the end-of-run check still stops with a problem Claude explained rather than fixed, read the explanation. If you agree, say *"That's fine: commit the work."*
-4. When Claude finishes, read the screen's source and check:
-   - every colour, font and size is a token, such as `BexleyFuchsia` or `BexleySizeBody`
-   - there's one heading with `Role: =TextRole.Heading1`, and it says what the screen is for
-   - every control has a name like `lblHeading` or `galItems`, and every icon and input has an `AccessibleLabel`
-   - the words match the plan exactly
-
-   Ask Claude to change anything that doesn't. The change is committed when the check passes.
-
-## Route B: in your dev environment
-
-### Set up the environment once, before you plan
-
-Do this before exercise 08 if you can: it restarts VS Code, and a plan waiting for approval doesn't survive a restart. If you've already planned, restart, run `claude --continue`, and say: *"Show me the plan for approval."*
+Do this before exercise 08 if you can: it restarts Claude Code, and a plan waiting for approval doesn't survive a restart. If you've already planned, restart, run `claude --continue`, and say: *"Show me the plan for approval."*
 
 Claude Code is running in VS Code's terminal, so run the commands below in a second terminal: **Terminal**, then **New Terminal**.
 
@@ -38,9 +17,12 @@ Claude Code is running in VS Code's terminal, so run the commands below in a sec
    pac auth create --environment https://<your-dev-environment>.crm11.dynamics.com
    ```
 
-3. **Connect the Dataverse MCP server** if your story uses Dataverse.
+3. **Bring the solution into your repository.** Ask Claude: *"Clone the solution named in AGENTS.md into src/solution."* It runs `pac solution clone` without asking: the Bexley guardrails check first that `pac` is connected to the dev environment in `AGENTS.md`, and stop it if it isn't.
+4. **Connect what your story uses.** Only the parts you need:
 
-   **On Windows**, set your dev environment's address, then restart VS Code. In PowerShell:
+   **Dataverse**, for tables, a model-driven app, or a screen that uses a table.
+
+   On Windows, set your dev environment's address, then restart VS Code. In PowerShell:
 
    ```powershell
    setx DATAVERSE_DEV_URL "https://<your-dev-environment>.crm11.dynamics.com"
@@ -48,77 +30,80 @@ Claude Code is running in VS Code's terminal, so run the commands below in a sec
 
    When Claude Code asks whether to use the MCP servers in `.mcp.json`, approve **dataverse**.
 
-   **On a Mac or Linux**, the template's server starts through Windows' `cmd`, so add your own instead, for this computer only. Run this in the second terminal, with your dev environment's address, then start Claude Code again:
+   On a Mac or Linux, the template's server starts through Windows' `cmd`, so add your own instead, for this computer only. Run this in the second terminal, with your dev environment's address, then start Claude Code again. It takes the place of the template's **dataverse** server, and nothing in the repository changes:
 
    ```bash
    claude mcp add --scope local dataverse -- npx -y @microsoft/dataverse mcp https://<your-dev-environment>.crm11.dynamics.com
    ```
 
-   It takes the place of the template's **dataverse** server in this repository. Nothing in the repository changes.
-
    Then run `/mcp` to check **dataverse** is connected.
 
-4. **Get the solution's source.** Ask Claude: *"Clone the solution named in AGENTS.md into src/solution."* It runs `pac solution clone`: approve it.
+   **A canvas app.** Microsoft's tools can't create the app, so you do, once:
 
-### Then build what your story needs
+   - In your solution, select **New**, **App**, **Canvas app**. Name it after your service, and save it.
+   - In Power Apps Studio, open **Settings**, **Updates**, and turn on **Coauthoring**. Keep this tab open while you build. Copy its address from the editing page, not the app player.
+   - In Claude Code, run `/configure-canvas-mcp` and paste the address. Check it by asking: *"List the available Canvas App controls."*
 
-**Dataverse tables and data**
+   No `/configure-canvas-mcp`? Microsoft's canvas-apps plugin isn't on yet, because the design in exercise 07 turns it on. Ask Claude to turn it on, then restart Claude Code.
 
-- Approve the plan. Claude looks at your tables without asking: listing and describing them is allowed.
-- It asks before it creates a table or columns, and before it adds records. Check every record is made up.
-- Ask it to delete one of the records. The Dataverse guard blocks it: deletes are never allowed through the assistant.
-- It runs `pac solution sync` in `src/solution`, so the table's source is in your repository. Approve it.
+   **A flow.** Microsoft's Power Automate plugin signs in with the Azure CLI. In the second terminal, sign in with the same account as `pac`:
 
-**A canvas app screen**
+   ```bash
+   az login
+   ```
 
-- Create a blank canvas app in your solution (**New**, **App**, **Canvas app**), named after your service, and save it. In Power Apps Studio, open **Settings**, **Updates**, and turn on **Coauthoring**. Copy the Studio address from your browser.
-- Run `/configure-canvas-mcp` and paste the Studio address when asked. Check it by asking: *"List the available Canvas App controls."* No `/configure-canvas-mcp`? Microsoft's canvas-apps plugin isn't on yet, because the design in exercise 07 turns it on. Ask Claude to turn it on, then restart Claude Code.
-- Approve the plan. Claude builds the screen with Microsoft's canvas tools: it appears in Power Apps Studio. Ask Claude to keep the source in `src/canvas/<AppName>/`.
-- In Power Apps Studio, play the app. Move through the screen with the Tab key only, and check every control shows a clear focus border.
+   No Power Automate tools when Claude builds? The plugin isn't on yet: ask Claude to turn on `power-automate` from the power-platform-skills marketplace, then restart Claude Code.
 
-**A model-driven app**
+   **A Power Pages page.** Use a dev site in your environment: dev sites are private, so the public can't find them. Ask Claude: *"Download the dev site's source into src/pages."*
 
-- Claude creates the tables and columns through the Dataverse MCP server, as above.
-- Build the app, its form and its views in the app designer, or ask Claude to use Microsoft's model-apps plugin if the set-up turned it on. Keep Microsoft's standard forms and theme: they're tested for accessibility.
-- Ask Claude: *"Sync the solution into src/solution."* Then the app's source is in your repository, where the checks can see it.
+   **A Copilot Studio agent.** In [Copilot Studio](https://copilotstudio.microsoft.com), in your dev environment, create the agent, named for its one job, and make sure it's in your solution: in Power Apps, open the solution and use **Add existing** if it isn't there. Add its knowledge: the bexley.gov.uk pages about your service, or documents the service owner has approved, with general knowledge and web search turned off. Then, in VS Code, open the Copilot Studio extension's **Agents** view, choose your environment, right-click the agent, select **Clone agent** and choose `src/agent/` in your repository.
 
-**A Power Pages page**
+## Build it
 
-- Use a dev site in your environment. Dev sites are private, so the public can't find them.
-- Claude uses Microsoft's power-pages plugin, if the set-up turned it on, or the Power Platform CLI (`pac pages download` and `pac pages upload`) to work on the site's source in `src/`. It asks before any upload, and only ever to the dev site.
-- Watch the standards check on each page: the page title, the language, labels, heading order and no tracking scripts.
+1. **Approve the plan**, choosing to auto-accept edits. Claude switches to Sonnet and builds in your dev environment without asking before each change.
+2. **Watch it build.** What happens depends on what your story needs:
 
-**A Power Automate flow**
+   | You're building | What Claude does | Try this |
+   |---|---|---|
+   | Dataverse tables | Creates the tables and columns, and a few made-up records, through the Dataverse MCP server | Ask it to delete one of the records. The Bexley guardrails block it: deletes are never allowed through the assistant |
+   | A canvas app screen | Brings the app into `src/canvas/<AppName>/`, writes the screen there, and compiles it into the app: it appears in the Power Apps Studio tab | In Studio, play the app. Move through the screen with the Tab key only, and check every control shows a clear focus border |
+   | A flow | Builds it in your dev environment, inside the solution, with Microsoft's Power Automate tools | Claude asks before it runs the flow, because a run can send real emails or messages: test only with made-up data and your own address. Ask it to delete the flow: that's blocked too |
+   | A model-driven app | Creates the tables and columns, as above | Build the app, its form and its views in the app designer yourself, keeping Microsoft's standard forms and theme. Then ask Claude: *"Bring in the latest version from the dev environment."* |
+   | A Power Pages page | Works on the page in `src/pages/`, then uploads it to the dev site with `pac pages upload`: the guardrails check it's the dev environment first | Watch the standards check on each page: the page title, the language, labels, heading order and no tracking scripts |
+   | A Copilot Studio agent | Edits the agent's `.mcs.yml` files in `src/agent/`. The standards check rejects emoji, real-looking personal data, placeholder text and card images without alt text | Apply the changes with the Copilot Studio extension, then test the agent in Copilot Studio with every question in `tests/agent-test-set.md`. Ask Claude to update `docs/compliance/atrs-record.md` with the ai-transparency skill |
 
-- Build the flow in the Power Automate designer, inside your solution, following the plan: Claude plans and reviews flows, but doesn't build them in the designer.
-- Ask Claude: *"Sync the solution into src/solution, and check the flow against the power-automate skill."* The standards check also runs on the flow's source: error handling, hard-coded mailboxes and personal data in emails.
-- Make the fixes in the designer, and ask Claude to sync again.
+3. **Watch the end of the run.** Before Claude can finish, the end-of-run check:
+   - has Claude bring in the latest version, with `pac solution sync` into `src/solution`. Claude Code shows this as a **Stop hook error** starting "Before finishing, bring the latest version from the dev environment into the repository"
+   - runs the standards check on everything that changed, and sends it back to fix anything it finds, in the dev environment
+   - asks the end-of-run reviewer, on Haiku, to review the changes
+   - asks Claude to commit the latest version and push it to GitHub
 
-**A Copilot Studio agent**
+   When Claude says it's committed and pushed, and Claude Code shows "Bexley end-of-run check passed", the run is finished.
+4. **Check what was built** against the plan. For a canvas app screen, read its source in `src/canvas/<AppName>/`:
+   - every colour, font and size is a token, such as `BexleyFuchsia` or `BexleySizeBody`
+   - there's one heading with `Role: =TextRole.Heading1`, and it says what the screen is for
+   - every control has a name like `lblHeading` or `galItems`, and every icon and input has an `AccessibleLabel`
+   - the words match the plan exactly
 
-- In [Copilot Studio](https://copilotstudio.microsoft.com), in your dev environment, create the agent, named for its one job. Make sure it's in your solution: in Power Apps, open the solution and use **Add existing** if it isn't there.
-- Add its knowledge: the bexley.gov.uk pages about your service, or documents the service owner has approved. Turn off general knowledge and web search, so it answers only from those.
-- In VS Code, open the Copilot Studio extension's **Agents** view, choose your environment, right-click the agent and select **Clone agent**. Choose `src/agent/` in your repository.
-- Approve the plan. The standards check runs on every `.mcs.yml` file Claude saves: it rejects emoji, real-looking personal data, placeholder text and card images without alt text.
-- Use the Copilot Studio extension to apply your changes to the agent, then test it in Copilot Studio with every question in `tests/agent-test-set.md`.
-- Ask Claude to update `docs/compliance/atrs-record.md` for the agent, using the ai-transparency skill.
+   Ask Claude to change anything that doesn't. It changes it in the dev environment, and the new version is synced, checked, committed and pushed in the same way.
 
-### Commit
+## Changed something yourself?
 
-Whatever you built, Claude commits it when the end-of-run check passes. When you change something outside Claude, such as a flow in the designer, ask Claude to sync the solution again: the check reviews what changed, then Claude commits it.
+If you change something in the dev environment yourself, in Power Apps Studio, the flow designer or the app designer, run `/lbbexley:sync`. Claude brings in the latest version, and the end-of-run check reviews it, then has it committed and pushed. Never edit the files in `src/solution` yourself: they'd no longer match the dev environment.
 
 ## Check
 
+- [ ] What you built is in your dev environment, and matches the plan, including the exact words
+- [ ] Claude said the work is committed and pushed, and Claude Code showed "Bexley end-of-run check passed"
+- [ ] The latest version is in `src/` and on GitHub: `src/solution`, and `src/canvas/<AppName>/` for a canvas app
+- [ ] Deleting a record or a flow was blocked
 - [ ] `npm run check:all` finds no problems
-- [ ] Claude Code showed "Bexley end-of-run check passed", and Claude said the work is committed
-- [ ] What you built matches the plan, including the exact words
-- [ ] With a dev environment: the source is in `src/`, and deleting a record was blocked
 
 ## What just happened
 
 - Approving the plan switched Claude from Opus to Sonnet: planning needs the strongest model, building doesn't.
-- The standards check sends every finding back to Claude straight away, so problems are fixed while the file is still open, not found later in review.
-- In your dev environment, the Dataverse guard let Claude explore freely, asked you before any record was read or changed, and blocked deletes.
+- Claude worked in the dev environment directly. You didn't approve each change, but the guardrails kept it to the dev environment in `AGENTS.md`, blocked deletes, and asked before anything that could reach people outside it, such as running a flow.
+- The end-of-run check made sure your repository has what's in the dev environment, had it reviewed on a smaller model, then had it saved on GitHub, where the same checks run again.
 
 ---
 

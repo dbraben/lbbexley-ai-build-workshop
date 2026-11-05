@@ -32,22 +32,24 @@ Every reference points one way: from your repository to the standards. The stand
 flowchart TD
     ask["You ask for a change"] --> plan["Plan on the strongest model<br/>skills: requirements, architect, plan"]
     plan --> approve{"You approve the plan"}
-    approve --> build["Build on the everyday model"]
-    build -- "every save" --> check["Standards check<br/>problems go straight back"]
+    approve --> build["Build on the everyday model,<br/>in the dev environment"]
+    build -- "every change" --> check["Standards check<br/>problems go straight back"]
     check --> build
-    build --> gate["End-of-run check on a smaller model<br/>standards check on everything changed,<br/>then a review for what tools can't see"]
+    build --> sync["The latest version comes<br/>into your repository"]
+    sync --> gate["End-of-run check on a smaller model<br/>standards check on everything changed,<br/>then a review for what tools can't see"]
     gate -- "anything found" --> build
-    gate -- "clean" --> save["The assistant commits the work for you"]
-    save -. "when you push it" .-> github["GitHub runs the same checks again,<br/>whichever assistant wrote the code, or none"]
+    gate -- "clean" --> save["The assistant commits and pushes it for you"]
+    save --> github["GitHub runs the same checks again,<br/>whichever assistant made the change, or none"]
 ```
 
 1. **Plan, on the strongest model.** The assistant writes down what it will do before it does it: the user need, the exact words people will read, and acceptance criteria someone can check. Nothing changes until you approve.
-2. **Build, on the everyday model.** Each time the assistant saves a file, the standards check runs and sends every problem straight back to it, so it fixes them while the file is still open.
-3. **Check, on a smaller model.** Before the assistant can finish, the end-of-run check runs the standards check on everything it changed, and a reviewer looks for what rules can't catch, such as unclear wording or a missing test. It also notes ideas for improving the harness.
-4. **Commit.** Once the check is clean, the assistant commits the work for you: it saves a version of everything that changed in Git, on your computer. In Claude Code the check asks it to; in Copilot you select **Commit the work**. You never need to run Git, make a branch or open a pull request.
-5. **On GitHub.** When your work is pushed to GitHub (exercise 11 shows how), the Bexley standards check runs again. It doesn't depend on any assistant, so it's the backstop.
+2. **Build, on the everyday model, in your dev environment.** The assistant builds the real thing with Microsoft's tools: the canvas app open in Power Apps Studio, the flow, the tables, the Power Pages site. It doesn't ask before each change in the dev environment. The standards check runs on everything it writes and sends every problem straight back to it.
+3. **Bring in the latest version.** After a change in the dev environment, the assistant brings the latest version into your repository: the solution with `pac solution sync`, and a canvas app's source through Microsoft's canvas tools. Your repository holds the guidelines and the latest version: nobody edits the service's source there by hand.
+4. **Check, on a smaller model.** Before the assistant can finish, the end-of-run check runs the standards check on everything that changed, and a reviewer looks for what rules can't catch, such as unclear wording or a missing test. It also notes ideas for improving the harness.
+5. **Commit and push.** Once the check is clean, the assistant commits the latest version and pushes it to GitHub for you. In Claude Code the check asks it to; in Copilot you select **Commit the work**. You never need to run Git, make a branch or open a pull request.
+6. **On GitHub.** Every push runs the Bexley standards check again. It doesn't depend on any assistant, so it's the backstop.
 
-Along the way, guardrails stop the assistant doing things it shouldn't: deploying to test or production, deleting Dataverse records, or (in Claude Code) receiving a prompt with real-looking personal data in it.
+Along the way, guardrails stop the assistant doing things it shouldn't: working in any environment but your dev one, deleting Dataverse records, flows or connections, force-pushing, or (in Claude Code) receiving a prompt with real-looking personal data in it.
 
 ## How each assistant gets the standards
 
@@ -69,7 +71,7 @@ The copies are synced from the standards repository at the release your reposito
 | `docs/requirements.md` | Users, user stories with acceptance criteria, rules, data, duties and open questions | The requirements skill, from your answers in the chat, checked by the service owner |
 | `docs/architecture.md` | The design: components, data flow, duties, diagram | The architect skill |
 | `docs/plans/` | One plan per change | The plan skill |
-| `src/` | The source: canvas apps, Power Pages, agents, flows, Dataverse | The assistant, from the plan you approved |
+| `src/` | The latest version from your dev environment: the solution (with flows and Dataverse), each canvas app's source, the Power Pages site, the agent | Nobody by hand: it's synced from the dev environment after each change |
 | `tests/` | What the accessibility tests open, the agent test set, and the log of your manual tests | The assistant, from what you tell it |
 | `docs/compliance/` | Accessibility statement, DPIA screening, equality impact, publicity check, ATRS record, retention | The assistant drafts them; the service team makes the decisions |
 | `.github/skills/lbbexley-*`, `.github/agents/lbbexley-*`, `.lbbexley/standards/` and the other synced files | Copies of the standards | Nobody by hand. `npm run standards:update` replaces them |
@@ -82,7 +84,8 @@ flowchart LR
     meeting["A cleaned Teams transcript<br/>(optional)"] -.-> req
     req -- "architect skill" --> arch["docs/architecture.md"]
     req -- "one story at a time:<br/>plan skill" --> plan["docs/plans/"]
-    plan -- "build, checked on every save" --> src["src/"]
+    plan -- "build, checked as it goes" --> dev["Your dev environment"]
+    dev -- "latest version synced" --> src["src/"]
 ```
 
 That's the path you'll follow in exercises 05 to 11, with your own project.

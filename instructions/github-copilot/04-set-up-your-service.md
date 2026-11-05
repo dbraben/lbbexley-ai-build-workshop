@@ -27,12 +27,12 @@ The **lbbexley-new-app** skill fills in the template for your project: the servi
    | Personal data | What the real service will handle, in general terms. Never real examples | Staff names and teams |
    | AI | An agent, AI Builder, AI prompts in flows, or none | None |
 
-   Not sure about an answer? Say so: "not decided yet" for what you're building, or "no environment yet" for the dev environment, are normal answers at this stage. Copilot records them, and the design step settles them. You can change anything after you've written the requirements.
+   Not sure about an answer? Say so: "not decided yet" for what you're building, or "no environment yet" for the dev environment, are normal answers at this stage. Copilot records them, and the design step settles them. You can change anything after you've written the requirements. You need the dev environment by exercise 08: everything is built there.
 
 3. Review each change Copilot proposes, and allow the commands it runs: `npm install` and `npm run test:a11y:install`.
 4. Watch the end of the run. If hooks are on, the standards check has run after each edit, and before the agent finishes it asks you to hand the changes to **lbbexley-check**.
 5. Select **Check my work**. The lbbexley-check agent, on a smaller model, runs the standards check, reviews the changes for what the check can't see, and logs any idea for improving the harness in `.lbbexley/improvements.md`. If it finds problems, select **Fix what the check found**: lbbexley-build fixes them. Then select **Check my work** again.
-6. **Commit the set-up.** When lbbexley-check finds nothing outstanding, select **Commit the work**. lbbexley-build commits the set-up, on `main`, and tells you it's committed: allow the `git` command it runs. Committing saves a version of your work in Git, on your computer. You don't type any Git commands: you commit every piece of work this way.
+6. **Commit the set-up.** When lbbexley-check finds nothing outstanding, select **Commit the work**. lbbexley-build commits the set-up, on `main`, pushes it to GitHub, and tells you it's committed and pushed: allow the `git` commands it runs if VS Code asks. Committing saves a version of your work in Git, and pushing puts it on GitHub, where the same checks run again. You don't type any Git commands: you save every piece of work this way.
 
    The buttons are under every reply from lbbexley-check, whatever it found, so read the result before you select one.
 
@@ -46,14 +46,14 @@ The **lbbexley-new-app** skill fills in the template for your project: the servi
 - [ ] `AGENTS.md` and `README.md` describe your service, with no `{{...}}` placeholders left
 - [ ] The compliance documents in `docs/compliance/` name your service. Any that depend on a decision you haven't made yet say "To be confirmed after the design."
 - [ ] lbbexley-check reported nothing outstanding
-- [ ] lbbexley-build said the set-up is committed
+- [ ] lbbexley-build said the set-up is committed and pushed
 
 ## What just happened
 
 - The set-up left some `{{...}}` parts in the compliance documents on purpose. They need real decisions from the service team, so `npm run check:release` keeps failing until they're done.
 - The check ran on a smaller model, because checking needs less than building.
-- The set-up was committed only after the check, because the check reads the changes that haven't been committed yet. The agents never make a branch, push or open a pull request unless you ask.
-- From now on, the standards check runs for every change: after each edit (with hooks), when you hand over to lbbexley-check, and again on GitHub whenever your work is pushed there.
+- The set-up was committed only after the check, because the check reads the changes that haven't been committed yet. The agents push each commit to GitHub, and never make a branch or open a pull request unless you ask.
+- From now on, the standards check runs for every change: after each edit (with hooks), when you hand over to lbbexley-check, and again on GitHub after each push.
 
 ---
 

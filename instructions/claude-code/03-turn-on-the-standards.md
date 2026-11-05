@@ -18,20 +18,20 @@ Claude Code gets the Bexley standards from the **lbbexley** plugin, which it ins
 2. When Claude Code asks whether you trust this folder, say yes. It then offers to add the plugin marketplaces listed in `.claude/settings.json` (**lbbexley-digital** and **power-platform-skills**) and to turn on the **lbbexley** plugin. Accept both.
 
    > [!TIP]
-   > No offer? Add the plugin yourself, for this computer only. Type `/exit`, run these two commands in the same terminal, then start Claude Code again with `claude`. `v0.5.0` is your repository's release: use the one in `.github/workflows/quality.yml`.
+   > No offer? Add the plugin yourself, for this computer only. Type `/exit`, run these two commands in the same terminal, then start Claude Code again with `claude`. `v0.6.0` is your repository's release: use the one in `.github/workflows/quality.yml`.
    > ```bash
-   > claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.5.0 --scope local
+   > claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.6.0 --scope local
    > claude plugin install lbbexley@lbbexley-digital --scope local
    > ```
 
-3. Check the plugin is on: run `/plugin`. **lbbexley** is listed as enabled. Then check it's the release your repository is on: open a second terminal (**Terminal**, then **New Terminal**) and run `claude plugin list`. The **Version** under `lbbexley@lbbexley-digital` matches the release in `.github/workflows/quality.yml`: version 0.5.0 for `v0.5.0`. If it doesn't, move it to your repository's release with these two commands in the second terminal, then start Claude Code again:
+3. Check the plugin is on: run `/plugin`. **lbbexley** is listed as enabled. Then check it's the release your repository is on: open a second terminal (**Terminal**, then **New Terminal**) and run `claude plugin list`. The **Version** under `lbbexley@lbbexley-digital` matches the release in `.github/workflows/quality.yml`: version 0.6.0 for `v0.6.0`. If it doesn't, move it to your repository's release with these two commands in the second terminal, then start Claude Code again:
 
    ```bash
-   claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.5.0 --scope local
+   claude plugin marketplace add dbraben/lbbexley-digital-standards#v0.6.0 --scope local
    claude plugin update lbbexley@lbbexley-digital
    ```
 
-4. Type `/lbbexley` and look at the commands it offers, including `requirements`, `architect`, `plan`, `review`, `improve` and `new-app`. You'll use each of them on your project.
+4. Type `/lbbexley` and look at the commands it offers, including `requirements`, `architect`, `plan`, `review`, `improve`, `sync` and `new-app`. You'll use most of them on your project.
 5. Run `/agents`. The plugin adds three read-only reviewers: `lbbexley:accessibility-reviewer`, `lbbexley:compliance-reviewer` and `lbbexley:end-of-run-reviewer`.
 6. **Check the model.** The project's `.claude/settings.json` sets `opusplan`: Opus while you plan, Sonnet once you approve the plan and build. Claude Code calls it **Opus Plan**, so you won't see the word `opusplan`:
    - When the session starts, Claude Code says it's **Using Opus Plan**, from `.claude/settings.json`.
@@ -58,10 +58,10 @@ Claude Code gets the Bexley standards from the **lbbexley** plugin, which it ins
 The plugin is now active in this repository, and only in Bexley repositories like it. It adds:
 
 - the skills: brand, accessibility, content style, the legal duties, one per platform, and the commands you just saw
-- guardrails that run automatically: a reminder at the start of each session, the personal-data guard, a Dataverse guard, the standards check after every save, and the end-of-run check before Claude finishes
+- guardrails that run automatically: a reminder at the start of each session, the personal-data guard, guards that keep Claude to your dev environment (for Dataverse, Power Automate and `pac`), the standards check after every save, and the end-of-run check before Claude finishes
 - the Microsoft Learn MCP server, so Claude checks Microsoft's current documentation rather than relying on memory
 
-The template's settings also let Claude commit your work without asking you, while it still asks before it pushes anything to GitHub. They stop Claude running the transcript cleaner or reading `.vtt` and roles files, and turn off Claude Code's attribution lines, so its commits don't carry them.
+The template's settings also let Claude build in your dev environment, bring the latest version into your repository, commit it and push it to GitHub without asking you. The guardrails block deletes, force pushes and anything aimed at an environment other than your dev one. The settings stop Claude running the transcript cleaner or reading `.vtt` and roles files, and turn off Claude Code's attribution lines, so its commits don't carry them.
 
 ---
 
